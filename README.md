@@ -83,4 +83,15 @@ SNSを用いた宣伝等
 - レスポンシブデザイン
 
 # 機能の実装方針予定
-今の所はLINE通知機能: LINE Messaging APIを予定していますが、ユーザー登録機能とログイン機能をGoogle認証にするかで変更します。
+今の所はLINE通知機能: LINE Messaging APIを予定していますが、ユーザー登録機能とログイン機能をGoogle認証にするかで変更します。  
+(いいねがついた時の通知としてLINE通知機能を使うか、ログイン機能をGoogle認証にするかで検討中です。)
+
+# 使用予定の技術スタック
+| カテゴリ | 技術 |
+| --- | --- |
+| 開発環境 | Docker |
+| フロントエンド | HTML / CSS / jQuery |
+| バックエンド | Rails 7.1.3.2 (Ruby 3.2.2 ) |
+| データベース | MySQL2 |
+| インフラ | Heroku |
+| Web API | Google OAuth 2.0 API または LINE Messaging API |
