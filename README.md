@@ -90,8 +90,11 @@ SNSを用いた宣伝等
 | カテゴリ | 技術 |
 | --- | --- |
 | 開発環境 | Docker |
-| フロントエンド | HTML / CSS / jQuery |
+| フロントエンド | HTML / CSS / JavaScript |
 | バックエンド | Rails 7.1.3.2 (Ruby 3.2.2 ) |
 | データベース | MySQL2 |
 | インフラ | Heroku |
 | Web API | Google OAuth 2.0 API または LINE Messaging API |
+
+# 画面遷移図
+[画面遷移図](https://www.figma.com/design/NwasnzHU8AJUFSiIa6SBPg/Empatia?node-id=0-1&t=uaA2LspzBDUCsqhL-1)
