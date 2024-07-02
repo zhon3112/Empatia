@@ -97,4 +97,3 @@ SNSを用いた宣伝等
 | Web API | Google OAuth 2.0 API または LINE Messaging API |
 
 # 画面遷移図
-[画面遷移図](https://www.figma.com/design/NwasnzHU8AJUFSiIa6SBPg/Empatia?node-id=0-1&t=uaA2LspzBDUCsqhL-1)
