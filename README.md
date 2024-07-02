@@ -100,7 +100,7 @@ SNSを用いた宣伝等
 [画面遷移図](https://www.figma.com/design/NwasnzHU8AJUFSiIa6SBPg/Empatia?node-id=0-1&t=uaA2LspzBDUCsqhL-1)
 
 # ER図
-[ER図](https://gyazo.com/8a5415baca7f4852f24772393eb3856d)
+### [ER図](https://gyazo.com/1254a680c4e85dde4ad9dcc2c1ac6a14)
 
 ![alt text](image.png)
 
@@ -125,17 +125,23 @@ SNSを用いた宣伝等
 - tagsテーブル(タグの情報をもつテーブル) 
   - id : タグのID(主キー)
   - name : タグの名前
+  - created_at : 作成日時
+  - updated_at : 更新日時
 
 
 - post_tags(ポストタグの情報をもつテーブル/中間テーブル)
   - id : ポストタグID(主キー)
   - post_id : ポストID(外部キー)
   - tag_id : タグID(外部キー)
+  - created_at : 作成日時
+  - updated_at : 更新日時
 
 
 - like_typesテーブル (いいねの種類の情報をもつテーブル)
   - id : いいねの種類のID (主キー)
   - name : いいねの種類名 (例: "嬉しい", "悲しい", "怒る" など)
+  - created_at : 作成日時
+  - updated_at : 更新日時
 
 
 - like_postsテーブル(いいねの情報をもつテーブル)
@@ -143,6 +149,8 @@ SNSを用いた宣伝等
   - user_id : ユーザーID(外部キー)
   - post_id : ポストID(外部キー)
   - like_type_id : いいねの種類のID (外部キー)
+  - created_at : 作成日時
+  - updated_at : 更新日時
 
 
 - テーブル間のリファレンス(外部キーの定義)
