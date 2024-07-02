@@ -98,3 +98,65 @@ SNSを用いた宣伝等
 
 # 画面遷移図
 [画面遷移図](https://www.figma.com/design/NwasnzHU8AJUFSiIa6SBPg/Empatia?node-id=0-1&t=uaA2LspzBDUCsqhL-1)
+
+# ER図
+### [ER図](https://gyazo.com/1254a680c4e85dde4ad9dcc2c1ac6a14)
+
+![alt text](image.png)
+
+- usersテーブル(ユーザー情報をもつテーブル)
+  - id : ユーザーID(主キー)
+  - name : 名前
+  - email : メールアドレス
+  - crypted_password : パスワード
+  - created_at : 作成日時
+  - updated_at : 更新日時
+
+
+- postsテーブル(ポストの情報をもつテーブル)
+  - id : ポストID(主キー)
+  - user_id : ユーザーID(外部キー)
+  - content : 内容
+  - is_public : 公開・非公開のフラグ
+  - created_at : 作成日時
+  - updated_at : 更新日時
+
+
+- tagsテーブル(タグの情報をもつテーブル) 
+  - id : タグのID(主キー)
+  - name : タグの名前
+  - created_at : 作成日時
+  - updated_at : 更新日時
+
+
+- post_tags(ポストタグの情報をもつテーブル/中間テーブル)
+  - id : ポストタグID(主キー)
+  - post_id : ポストID(外部キー)
+  - tag_id : タグID(外部キー)
+  - created_at : 作成日時
+  - updated_at : 更新日時
+
+
+- like_typesテーブル (いいねの種類の情報をもつテーブル)
+  - id : いいねの種類のID (主キー)
+  - name : いいねの種類名 (例: "嬉しい", "悲しい", "怒る" など)
+  - created_at : 作成日時
+  - updated_at : 更新日時
+
+
+- like_postsテーブル(いいねの情報をもつテーブル)
+  - id : いいねのID(主キー)
+  - user_id : ユーザーID(外部キー)
+  - post_id : ポストID(外部キー)
+  - like_type_id : いいねの種類のID (外部キー)
+  - created_at : 作成日時
+  - updated_at : 更新日時
+
+
+- テーブル間のリファレンス(外部キーの定義)
+  - posts.user_id は users.id を参照
+  - post_tags.post_id は posts.id を参照
+  - post_tags.tag_id は tags.id を参照
+  - like_posts.user_id は users.id を参照
+  - like_posts.post_id は posts.id を参照
+  - like_posts.like_type_id は like_types.id を参照
