@@ -43,9 +43,8 @@ class PostsController < ApplicationController
     @post.destroy
     redirect_to posts_path, notice: '投稿が削除されました！'
   end
-end
 
-private
+  private
 
   def post_params
     params.require(:post).permit(:content, :status)
