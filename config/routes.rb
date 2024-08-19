@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :posts
+  
   root "home#top"
 
   resources :users, only: %i[new create]
