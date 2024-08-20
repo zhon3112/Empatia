@@ -19,9 +19,11 @@
 		<%= f.label :password_confirmation, class: "form-label" %>
 		<%= f.password_field :password_confirmation, class: "form-control" %>
 	</div>
+
 	<%= f.submit "登録", class: "btn btn-primary" %>
 <% end %>
 
-<div>
-	<%= link_to 'ログインページへ', login_path %>
-</div>
+	<% if current_user %>
+		<%= link_to '登録', user_path(current_user.id) %>
+	<% end %>
+

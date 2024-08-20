@@ -3,7 +3,7 @@
 		<!-- 文字の大きさと色 -->
 		<h1 class="inline-block text-5xl text-white">Empatia</h1>
 			<div class="flex md:text-base gap-2 md:gap-10 flex justify-end text-xl text-white">
-				<%= link_to 'Logout', logout_path %> 
+				<%= link_to 'Logout', logout_path, class: 'dropdown-item', data: { turbo_method: :delete } %>
 			</div>
 	</div>
 </header>
