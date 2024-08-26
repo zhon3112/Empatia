@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :require_login
 
   def index
-    @posts = Post.limit(20)
+    @posts = Post.all
   end
 
   def show
@@ -15,11 +15,10 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    @post.user = current_user
-
     if @post.save
-      redirect_to @post, notice: '投稿が作成されました！'
+      redirect_to @post
     else
+      Rails.logger.debug(@post.errors.full_messages)
       render :new
     end
   end
@@ -47,12 +46,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:content, :status)
-  end
-
-  def require_login
-    unless logged_in?
-      redirect_to login_path
-    end
+    params.require(:post).permit(:content, :user_id, status: [])
   end
 end
