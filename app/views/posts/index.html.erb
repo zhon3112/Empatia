@@ -1,21 +1,29 @@
 <h1>マイページ</h1>
 
+<br>
+<h2>みんなの投稿</h2>
+<% @posts.each do |post| %>
+  <div class="post">
+    <p><%= post.content %></p>
+  </div>
+<% end %>
+</br>
 
-
+<br>
 <h2>自分の投稿</h2>
 <% @user.posts.each do |post| %>
   <div class="post">
     <p><%= post.content %></p>
   </div>
 <% end %>
-
+</br>
 
 
 <button class="btn" onclick="my_modal_1.showModal()">投稿作成</button>
 <dialog id="my_modal_1" class="modal">
   <div class="modal-box">
     <h3 class="text-lg font-bold">投稿作成画面</h3>
-    <%= form_with(model: @post, url: posts_path, method: :post) do |f| %>
+    <%= form_with(model: @post, url: user_posts_path(current_user), method: :post) do |f| %>
       <div class="form-group">
         <%= f.text_area :content, class: "form-control", placeholder: "ポスト内容", rows: 5 %>
         <%= f.hidden_field :user_id, value: current_user.id %>
