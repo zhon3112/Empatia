@@ -2,7 +2,9 @@ class PostsController < ApplicationController
   before_action :require_login
 
   def index
-    @posts = Post.limit(20)
+    @posts = Post.where.not(user_id: current_user.id) # 自分以外のみんなの投稿
+    @user = current_user #自分
+    @post = @user.posts.build # 新規投稿用
   end
 
   def show
@@ -14,11 +16,10 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
-    @post.user = current_user
+    @post = current_user.posts.new(post_params)
 
     if @post.save
-      redirect_to @post, notice: '投稿が作成されました！'
+      redirect_to posts_path, notice: '投稿が作成されました！'
     else
       render :new
     end
@@ -47,12 +48,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:content, :status)
-  end
-
-  def require_login
-    unless logged_in?
-      redirect_to login_path
-    end
+    params.require(:post).permit(:content, :user_id, :status)
   end
 end

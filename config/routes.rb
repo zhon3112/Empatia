@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   root "home#top"
 
-  resources :users, only: %i[new create show]
-  resources :posts
+  resources :users, only: [:new, :create, :show] do
+    resources :posts 
+  end
+  resources :posts, only: [:index]
 
   get "sign_up", to: "users#new"
   get 'login', to: 'user_sessions#new'
