@@ -31,9 +31,8 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-
     if @post.update(post_params)
-      redirect_to @post, notice: '投稿が更新されました！'
+      redirect_to user_posts_path(current_user), notice: '投稿が更新されました。'
     else
       render :edit
     end
