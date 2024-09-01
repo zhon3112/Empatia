@@ -13,9 +13,10 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       auto_login(@user)
-      redirect_to user_posts_path(@user)
+      redirect_to user_posts_path(@user), notice: "ユーザーが作成されました"
     else
-      render :new
+      flash.now[:alert] = "パスワードは8文字で作成してください"
+      render :new, status: :unprocessable_entity
     end
   end
 
