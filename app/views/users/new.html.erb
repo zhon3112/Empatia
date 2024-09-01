@@ -1,5 +1,6 @@
 <h1 class="text-black">新規登録</h1>
-<%= form_with model: @user do |f| %>
+
+<%= form_with(model: @user, local: true) do |f| %>
 	<div>
 		<%= f.label :username, class: "form-label" %>
 		<%= f.text_field :username, class: "form-control" %>
@@ -11,7 +12,7 @@
 	</div>
 
 	<div>
-	<p>パスワードには英大文字・記号を含めた8文字以上で作成してください</p>
+	<p>パスワードは8文字以上で作成してください</p>
 		<%= f.label :password, class: "form-label" %>
 		<%= f.password_field :password, class: "form-control" %>
 	</div>
