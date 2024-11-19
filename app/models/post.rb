@@ -1,6 +1,5 @@
 class Post < ApplicationRecord
   belongs_to :user
-  include PrimaryKeyUuidAutoGeneratable
 
   validates :content, presence: true, length: { maximum: 140 }
 
