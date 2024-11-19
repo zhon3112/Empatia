@@ -17,6 +17,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_15_103159) do
     t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "uuid"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -27,6 +28,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_15_103159) do
     t.string "salt"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "uuid"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
