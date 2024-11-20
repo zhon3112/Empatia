@@ -4,7 +4,7 @@ class UserSessionsController < ApplicationController
   def new; end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find(params[:uuid])
   end
 
   def create
