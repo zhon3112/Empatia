@@ -2,6 +2,9 @@ class PostsController < ApplicationController
   before_action :require_login
 
   def index
+    @q = Post.ransack(params[:q])
+    @posts = @q.result(distinct: true)
+
     @posts = Post.where.not(user_id: current_user.id) # 自分以外のみんなの投稿
     @user = current_user #自分
     @post = @user.posts.build # 新規投稿用
@@ -42,6 +45,18 @@ class PostsController < ApplicationController
     @post = Post.find(params[:uuid])
     @post.destroy
     redirect_to posts_path, notice: '投稿が削除されました！'
+  end
+
+  def search
+    @q = current_user.posts.ransack(params[:q])
+    @posts = @q.result(distinct: true)
+
+    if @posts.any?
+      redirect_to search_posts_path(q: params[:q])
+    else
+      flash[:notice] = "検索結果がありませんでした"
+      render :index
+    end
   end
 
   private

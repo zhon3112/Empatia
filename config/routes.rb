@@ -9,5 +9,9 @@ Rails.application.routes.draw do
   resources :users, param: :uuid, path: '/', only: [:new, :create, :show] do
     resources :posts,param: :uuid, path: '/'
   end
-  resources :posts, only: [:index]
+  resources :posts, only: [:index,]
+    # collection do
+      # get :search
+    # end
+    # resources :searchs, only: %i[create destroy]
 end
