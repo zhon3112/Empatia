@@ -72,4 +72,4 @@ end
 
 gem 'sorcery'
 
-gem 'ransack'
+gem 'ransack', '3.2.1'

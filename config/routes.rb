@@ -10,8 +10,5 @@ Rails.application.routes.draw do
     resources :posts,param: :uuid, path: '/'
   end
   resources :posts, only: [:index,]
-    # collection do
-      # get :search
-    # end
-    # resources :searchs, only: %i[create destroy]
+  get 'search', to: 'posts#search'
 end

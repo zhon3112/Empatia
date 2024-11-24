@@ -2,12 +2,11 @@ class PostsController < ApplicationController
   before_action :require_login
 
   def index
-    @q = Post.ransack(params[:q])
-    @posts = @q.result(distinct: true)
-
-    @posts = Post.where.not(user_id: current_user.id) # 自分以外のみんなの投稿
     @user = current_user #自分
     @post = @user.posts.build # 新規投稿用
+    Rails.logger.debug "Search Params: #{params[:q].inspect}" # 検索パラメータをログに出力
+    @q = Post.ransack(params[:q])
+    @posts = @q.result(distinct: true).where.not(user_id: @user.id) # 自分以外のみんなの投稿
   end
 
   def show
@@ -49,10 +48,10 @@ class PostsController < ApplicationController
 
   def search
     @q = current_user.posts.ransack(params[:q])
-    @posts = @q.result(distinct: true)
+    @posts = @q.result(distinct: true).where.not(user_id: @user.id)
 
     if @posts.any?
-      redirect_to search_posts_path(q: params[:q])
+      redirect_to posts_search_path(q: params[:q])
     else
       flash[:notice] = "検索結果がありませんでした"
       render :index
