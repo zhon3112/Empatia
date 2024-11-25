@@ -9,6 +9,5 @@ Rails.application.routes.draw do
   resources :users, param: :uuid, path: '/', only: [:new, :create, :show] do
     resources :posts,param: :uuid, path: '/'
   end
-  resources :posts, only: [:index,]
-  get 'search', to: 'posts#search'
+  resources :posts, only: [:index]
 end
