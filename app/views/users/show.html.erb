@@ -1,4 +1,4 @@
-<p>自分の投稿一覧</p>
+<p><%= @user.name %>さんの投稿一覧</p>
 
 <br>
 <h2 class="inline-block text-lg text-indigo-300">自分の投稿</h2>
@@ -19,7 +19,7 @@
 <dialog id="my_modal_1" class="modal">
   <div class="modal-box">
     <h3 class="text-lg font-bold">投稿作成画面</h3>
-    <%= form_with(model: @post, url: user_posts_path(current_user), method: :post) do |f| %>
+    <%= form_with(model: @post, url: mypage_path(current_user), method: :post) do |f| %>
       <div class="form-group">
         <%= f.text_area :content, class: "form-control", placeholder: "ポスト内容", rows: 5 %>
         <%= f.hidden_field :user_id, value: current_user.id %>
