@@ -2,9 +2,18 @@ class PostsController < ApplicationController
   before_action :require_login
 
   def index
-    @posts = Post.where.not(user_id: current_user.id) # 自分以外のみんなの投稿
     @user = current_user #自分
     @post = @user.posts.build # 新規投稿用
+    @q = Post.ransack(params[:q])
+
+    if params[:q].present?
+      @posts = @q.result(distinct: true).where.not(user_id: @user.id) # 検索結果を取得(自分の投稿は除外)
+    else
+      @posts = Post.where.not(user_id: @user.id)
+    end
+
+    # 検索結果が空の場合のメッセージ
+    @message = @posts.empty? ? "検索結果はありませんでした" : nil
   end
 
   def show
