@@ -26,6 +26,6 @@
 <% end %>
 
 	<% if current_user %>
-		<%= link_to '登録', user_posts_path %>
+		<%= link_to '登録', user_posts_path(current_user.id) %>
 	<% end %>
 

@@ -8,7 +8,12 @@ class PostsController < ApplicationController
 
     if params[:q].present?
       @posts = @q.result(distinct: true).where.not(user_id: @user.id) # 検索結果を取得(自分の投稿は除外)
+    else
+      @posts = Post.where.not(user_id: @user.id)
     end
+
+    # 検索結果が空の場合のメッセージ
+    @message = @posts.empty? ? "検索結果はありませんでした" : nil
   end
 
   def show
