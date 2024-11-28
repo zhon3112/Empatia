@@ -6,6 +6,10 @@ class Post < ApplicationRecord
 
   enum status: { visible: 0, is_public: 1 }
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["content"]
+  end
+
   def make_private
     update(status: :is_public)
   end
