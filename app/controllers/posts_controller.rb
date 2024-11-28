@@ -7,13 +7,11 @@ class PostsController < ApplicationController
     @q = Post.ransack(params[:q])
 
     if params[:q].present?
-      @posts = @q.result(distinct: true).where.not(user_id: @user.id) # 検索結果を取得(自分の投稿は除外)
+      @posts = @q.result(distinct: true).where.not(user_id: @user.id)
     else
       @posts = Post.where.not(user_id: @user.id)
     end
-
-    # 検索結果が空の場合のメッセージ
-    @message = @posts.empty? ? "検索結果はありませんでした" : nil
+    @message = @posts.empty? ? "検索結果はありませんでした" : nil # 検索結果が空の場合のメッセージ
   end
 
   def show
@@ -28,7 +26,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.new(post_params)
 
     if @post.save
-      redirect_to posts_path, notice: '投稿が作成されました！'
+      redirect_to user_path(current_user), notice: '投稿が作成されました！'
     else
       render :new
     end
@@ -41,7 +39,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:uuid])
     if @post.update(post_params)
-      redirect_to user_posts_path(current_user), notice: '投稿が更新されました。'
+      redirect_to user_path(current_user), notice: '投稿が更新されました。'
     else
       render :edit
     end
@@ -50,7 +48,7 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:uuid])
     @post.destroy
-    redirect_to posts_path, notice: '投稿が削除されました！'
+    redirect_to user_path(current_user), notice: '投稿が削除されました！'
   end
 
   private

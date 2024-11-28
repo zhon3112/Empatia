@@ -6,14 +6,14 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:uuid])
+    @posts = current_user.posts
   end
 
   def create
     @user = User.new(user_params)
     if @user.save
       auto_login(@user)
-      redirect_to user_posts_path(@user), notice: "ユーザーが作成されました"
+      redirect_to posts_path, notice: "ユーザーが作成されました"
     else
       flash.now[:alert] = "パスワードは8文字で作成してください"
       render :new, status: :unprocessable_entity
