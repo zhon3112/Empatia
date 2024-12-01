@@ -2,20 +2,14 @@ class PostsController < ApplicationController
   before_action :require_login
 
   def index
-    @user = current_user #自分
-    @post = @user.posts.build # 新規投稿用
     @q = Post.ransack(params[:q])
 
     if params[:q].present?
-      @posts = @q.result(distinct: true).where.not(user_id: @user.id)
+      @posts = @q.result(distinct: true).where.not(user_id: current_user.id)
     else
-      @posts = Post.where.not(user_id: @user.id)
+      @posts = Post.where.not(user_id: current_user.id)
     end
     @message = @posts.empty? ? "検索結果はありませんでした" : nil # 検索結果が空の場合のメッセージ
-  end
-
-  def show
-    @post = Post.find(params[:uuid])
   end
 
   def new
@@ -23,7 +17,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.new(post_params)
+    @post = current_user.posts.build(post_params)
 
     if @post.save
       redirect_to user_path(current_user), notice: '投稿が作成されました！'
@@ -54,6 +48,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:content, :user_id, :status)
+    params.require(:post).permit(:content, :status)# postパラメーターの中から必要な属性を許可する
   end
 end
