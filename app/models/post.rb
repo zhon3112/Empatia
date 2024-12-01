@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :user
-  attribute :uuid, :string, default: -> { SecureRandom.uuid }
+  attribute :uuid, :string, default: -> { SecureRandom.uuid } #重複を避けたユニークなUUIDをstring型の属性として定義新しく作成されるオブジェクトには自動的に割り当てられる
 
   validates :content, presence: true, length: { maximum: 140 }
 
