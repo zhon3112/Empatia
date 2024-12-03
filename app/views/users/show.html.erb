@@ -8,6 +8,7 @@
       <div class="card-body">
         <p class="text-black text-lg"><%= post.content %></p>
       </div>
+      <%= link_to '編集', edit_post_path(post), class: 'btn btn-active btn-ghost' %>
     </div>
   </div>
 <% end %>

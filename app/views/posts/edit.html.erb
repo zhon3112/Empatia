@@ -1,2 +1,28 @@
-<h1>編集</h1>
-<p>Find me in app/views/posts/edit.html.erb</p>
+<%= form_with(model: @post, local: true) do |form| %>
+  <div>
+    <%= form.label :content %>
+    <%= form.text_area :content %>
+  </div>
+<% end %>
+
+
+<!-- 編集用のモーダル -->
+<dialog id="editModal" class="modal">
+  <div class="modal-box">
+    <h3 class="text-lg font-bold">投稿編集</h3>
+    <%= form_with model: @post, url: posts_path(current_user), method: :patch, local: true do |f| %>
+      <div class="form-group">
+        <%= f.text_area :content, class: "form-control", placeholder: "ポスト内容", rows: 5, value: @post.content %>
+        <%= f.text_field :status, class: "form-control", placeholder: "ステータス" %>
+      </div>
+      <div class="form-group">
+        <%= f.submit "更新", class: "btn" %>
+      </div>
+    <% end %>
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>

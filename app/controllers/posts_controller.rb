@@ -27,11 +27,11 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:uuid])
+    @post = current_user.posts.find(params[:post_uuid])
   end
 
   def update
-    @post = Post.find(params[:uuid])
+    @post = current_user.posts.find(params[:post_uuid])
     if @post.update(post_params)
       redirect_to user_path(current_user), notice: '投稿が更新されました。'
     else
@@ -39,11 +39,11 @@ class PostsController < ApplicationController
     end
   end
 
-  def destroy
-    @post = Post.find(params[:uuid])
-    @post.destroy
-    redirect_to user_path(current_user), notice: '投稿が削除されました！'
-  end
+  # def destroy
+  #   @post = Post.find(params[:uuid])
+  #   @post.destroy
+  #   redirect_to user_path(current_user), notice: '投稿が削除されました！'
+  # end
 
   private
 

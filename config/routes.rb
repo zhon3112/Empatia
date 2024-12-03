@@ -9,5 +9,5 @@ Rails.application.routes.draw do
   resources :posts, only: [:index] #GETリクエストのみ対応
   resources :users, param: :uuid, only: [:new, :show, :create]
   #UUIDを使った投稿に関するルート設定
-  resources :posts, param: :uuid, only: [:show, :new, :create]
+  resources :posts, param: :uuid, only: [:show, :new, :create, :edit, :update]
 end
