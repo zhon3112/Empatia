@@ -44,11 +44,12 @@ class PostsController < ApplicationController
     end
   end
 
-  # def destroy
-  #   @post = Post.find(params[:uuid])
-  #   @post.destroy
-  #   redirect_to user_path(current_user), notice: '投稿が削除されました！'
-  # end
+  def destroy
+    @post = current_user.posts.find(params[:id])
+    if @post.destroy
+      redirect_to user_path(current_user), notice: "投稿が削除されました"
+    end
+  end
 
   private
 
