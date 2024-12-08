@@ -27,27 +27,32 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:uuid])
+    @post = current_user.posts.find(params[:id])
+    if @post.nil?
+      redirect_to user_path(current_user), alert: "投稿が見つかりませんでした"
+      puts
+    end
   end
 
   def update
-    @post = Post.find(params[:uuid])
+    @post = current_user.posts.find(params[:id])
     if @post.update(post_params)
-      redirect_to user_path(current_user), notice: '投稿が更新されました。'
+      redirect_to user_path(current_user), notice: "投稿を編集しました"
     else
+      flash.now[:danger] = "編集に失敗しました"
       render :edit
     end
   end
 
-  def destroy
-    @post = Post.find(params[:uuid])
-    @post.destroy
-    redirect_to user_path(current_user), notice: '投稿が削除されました！'
-  end
+  # def destroy
+  #   @post = Post.find(params[:uuid])
+  #   @post.destroy
+  #   redirect_to user_path(current_user), notice: '投稿が削除されました！'
+  # end
 
   private
 
   def post_params
-    params.require(:post).permit(:content, :status)# postパラメーターの中から必要な属性を許可する
+    params.require(:post).permit(:content, :status, :id)# postパラメーターの中から必要な属性を許可する
   end
 end
