@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   delete 'logout', to: 'user_sessions#destroy'
 
   resources :posts, only: [:index] #GETリクエストのみ対応
-  resources :users, param: :uuid, only: [:new, :show, :create]
-  #UUIDを使った投稿に関するルート設定
-  resources :posts, param: :uuid, only: [:show, :new, :create, :edit, :update]
+  resources :users, only: [:new, :show, :create]
+  resources :posts, only: [:show, :new, :create, :edit, :update]
 end
