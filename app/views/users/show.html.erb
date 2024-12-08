@@ -9,6 +9,7 @@
         <p class="text-black text-lg"><%= post.content %></p>
       </div>
       <%= link_to '編集', edit_post_path(post), id: "post_#{post.id}", class: 'btn btn-active btn-ghost' %>
+      <%= link_to '削除', post_path(post), id: "button-delete-#{post.id}", data: { turbo_method: :delete }, class: 'btn btn-active btn-ghost' %>
     </div>
   </div>
 <% end %>
