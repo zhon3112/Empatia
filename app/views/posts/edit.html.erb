@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= form.label :status %>
-    < %= form.select :status, options_for_select([['Visible', 0], ['Hidden', 1]], @post.status) %>
+    <%= form.select :status, [['公開', 'published'], ['非公開', 'unpublished']] %>
   </div>
 
   <div class="btn btn-active btn-accent">
@@ -26,4 +26,4 @@
   </div>
 <% end %>
 
-<%= link_to '戻る', posts_path %>
+<%= link_to '戻る', user_path(current_user) %>

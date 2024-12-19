@@ -8,5 +8,5 @@ Rails.application.routes.draw do
 
   resources :posts, only: [:index] #GETリクエストのみ対応
   resources :users, only: [:new, :show, :create]
-  resources :posts, only: [:show, :new, :create, :edit, :update, :destroy]
+  resources :posts, only: [:new, :create, :edit, :update, :destroy]
 end

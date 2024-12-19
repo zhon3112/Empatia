@@ -24,7 +24,10 @@
     <%= form_with model: @post, url: posts_path, method: :post, local: true do |f| %>
       <div class="form-group">
         <%= f.text_area :content, class: "form-control", placeholder: "ポスト内容", rows: 5 %>
-        <%= f.text_field :status, class: "form-control", placeholder: "ステータス" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :status, "ステータス" %>
+        <%= f.select :status, [['公開', 'published'], ['非公開', 'unpublished']], { prompt: '選択してください' }, class: "form-control" %>
       </div>
       <div class="form-group">
         <%= f.submit "作成", class: "btn" %>
