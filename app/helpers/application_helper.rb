@@ -7,14 +7,14 @@ module ApplicationHelper
       charset: 'utf-8',
       description: 'Empatiaでは、日々の思いや感情を投稿し、匿名だからこそ見つかる新しい共感のつながりを楽しむことができます。',
       keywords: '感情,気持ち,共感,共有',
-      canonical: https://www.app-empatia.com/,
+      canonical: 'https://www.app-empatia.com/',
       separator: '|',
       og:{
         site_name: :site,
         title: :title,
         description: :description,
         type: 'website',
-        url: https://www.app-empatia.com/,
+        url: 'https://www.app-empatia.com/',
         image: image_url('ogp.png'),
         local: 'ja-JP'
       },
