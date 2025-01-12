@@ -22,7 +22,8 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to user_path(current_user), notice: @post.published? ? '公開で投稿されました！' : '非公開で投稿されました！'
     else
-      render :new
+      flash.now[:alert] = "投稿が失敗しました！"
+      render :new, status: :unprocessable_entity
     end
   end
 
