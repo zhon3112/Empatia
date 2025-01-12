@@ -1,6 +1,8 @@
 class Post < ApplicationRecord
   belongs_to :user
 
+  validates :content,invalid_words: true
+
   validates :content, presence: true, length: { maximum: 140 }
 
   enum status: { published: 0, unpublished: 1 }, _default: :published # 投稿のステータス(公開・非公開)
