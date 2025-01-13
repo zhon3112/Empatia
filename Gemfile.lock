@@ -112,6 +112,7 @@ GEM
     globalid (1.2.1)
       activesupport (>= 6.1)
     hashie (5.0.0)
+    high_voltage (4.0.0)
     i18n (1.14.5)
       concurrent-ruby (~> 1.0)
     io-console (0.7.2)
@@ -299,6 +300,7 @@ DEPENDENCIES
   capybara
   cssbundling-rails
   debug
+  high_voltage
   jbuilder
   jsbundling-rails
   meta-tags
