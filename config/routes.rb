@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   root "home#top"
 
+  get 'terms', to: 'pages#terms'
+  get 'privacy_policy', to: 'pages#privacy_policy'
+
   get 'sign_up', to: 'users#new'
   get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'

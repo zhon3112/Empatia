@@ -75,5 +75,3 @@ gem 'sorcery'
 gem 'ransack', '4.2.0'
 
 gem 'meta-tags'
-
-gem 'high_voltage'
