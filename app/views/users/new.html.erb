@@ -22,10 +22,14 @@
 		<%= f.password_field :password_confirmation, class: "form-control" %>
 	</div>
 
+		<div>
+		<%= link_to '利用規約はこちらから', terms_path, target: '_blank' %>
+	</div>
+
+	<div class="field">
+		<%= f.check_box :terms_accepted, {}, true, false %>
+		<%= f.label :terms_accepted, '利用規約に同意します' %>
+	</div>
+
 	<%= f.submit "登録", class: "btn btn-primary" %>
 <% end %>
-
-	<% if current_user %>
-		<%= link_to '登録', posts_path(current_user.id) %>
-	<% end %>
-
