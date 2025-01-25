@@ -1,8 +1,8 @@
 class Post < ApplicationRecord
   belongs_to :user
+  has_many :likes, dependent: :destroy
 
   validates :content,invalid_words: true
-
   validates :content, presence: true, length: { maximum: 140 }
 
   enum status: { published: 0, unpublished: 1 }, _default: :published # 投稿のステータス(公開・非公開)
@@ -11,5 +11,9 @@ class Post < ApplicationRecord
 
   def self.ransackable_attributes(auth_object = nil)
     ["content"]
+  end
+
+  def liked_by?(user, like_type)
+    likes.exists?(user_id: user.id, like_type: like_type)
   end
 end
