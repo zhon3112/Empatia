@@ -13,7 +13,13 @@ class Post < ApplicationRecord
     ["content"]
   end
 
+  # いいねしているかどうかの判断
   def liked_by?(user, like_type)
     likes.exists?(user_id: user.id, like_type: like_type)
+  end
+
+  #いいねしていないかどうかの判断
+  def unliked?(user, like_type)
+    likes.where(user_id: user.id, like_type: like_type).empty?
   end
 end
