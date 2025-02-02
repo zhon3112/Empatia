@@ -9,7 +9,12 @@ Rails.application.routes.draw do
   post 'login', to: 'user_sessions#create'
   delete 'logout', to: 'user_sessions#destroy'
 
-  resources :posts, only: [:index] #GETリクエストのみ対応
   resources :users, only: [:new, :show, :create]
-  resources :posts, only: [:new, :create, :edit, :update, :destroy]
+
+  #resources :my_posts, only: [:index]
+  resources :my_likes, only: [:index]
+
+  resources :posts do
+    resources :likes, only: [:create, :destroy]
+  end
 end

@@ -1,0 +1,12 @@
+<!--- _like_buttonsにrenderさせる --->
+<%= form_with url: post_likes_path(post.id, type: :like_first), method: :post, data: { turbo_stream: true }, html: { id: 'first-like', class: 'app-link like-button-1', style: 'display: inline;' } do %>
+  <button type="submit" class="flex items-center space-x-1 bg-fuchsia-300 text-white px-4 py-2 rounded-full hover:bg-teal-600">
+    <i class="fa-thin fa-comment-heart"></i>
+    <p class="text-xs"><%= post.likes.where(like_type: 'like_first').count %></p>
+  </button>
+<% end %>
+<!--- bg-fuchsia-300：ボタンの背景色 --->
+<!--- text-white：ボタン内の文字（アイコンとカウント数）の色を白 --->
+<!--- hover:bg-teal-600：ホバー時に背景色が少し濃くなる --->
+<!--- px-4 py-2：ボタンのパディングを調整 --->
+<!--- rounded-full：ボタンの丸み --->
