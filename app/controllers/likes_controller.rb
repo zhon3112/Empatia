@@ -4,7 +4,12 @@ class LikesController < ApplicationController
   def create
     @post = Post.find(params[:post_id])
     @like = current_user.likes.new(post_id: params[:post_id], like_type: params[:like_type])
-    @like.save
+    if @like.save
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to @post, notice: 'いいねしました！' }
+      end
+    end
   end
 
   def destroy

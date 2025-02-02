@@ -1,0 +1,8 @@
+<!--- いいね1 --->
+<%= turbo_stream.replace "first-like" do %>
+  <button type="submit" class="flex items-center space-x-1 bg-fuchsia-300 text-white px-4 py-2 rounded-full hover:bg-teal-600">
+    <i class="fa-thin fa-comment-heart"></i> <!-- いいねのアイコン（ハートアイコン） -->
+    <p class="text-xs"><%= @post.likes.where(like_type: 'like_first').count %></p> <!-- いいねの数 -->
+  </button>
+<% end %>
+
