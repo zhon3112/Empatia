@@ -3,17 +3,8 @@ class PostsController < ApplicationController
 
   def index
     @q = Post.ransack(params[:q])
-
-    if params[:q].present?
-      @posts = @q.result(distinct: true).where.not(user_id: current_user.id)
-    else
-      @posts = Post.where.not(user_id: current_user.id)
-    end
-    @message = @posts.empty? ? "検索結果はありませんでした" : nil # 検索結果が空の場合のメッセージ
-  end
-
-  def show
-    @post = Post.find(params[:id])
+    @posts = @q.result(distinct: true).published.where.not(user_id: current_user.id)
+    @message = @posts.empty? ? "検索結果はありませんでした" : nil
   end
 
   def new
@@ -24,7 +15,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
 
     if @post.save
-      redirect_to user_path(current_user), notice: @post.published? ? '公開で投稿されました！' : '非公開で投稿されました！'
+      redirect_to my_posts_path(current_user), notice: @post.published? ? '公開で投稿されました！' : '非公開で投稿されました！'
     else
       flash.now[:alert] = "投稿が失敗しました！"
       render :new, status: :unprocessable_entity
@@ -34,7 +25,7 @@ class PostsController < ApplicationController
   def edit
     @post = current_user.posts.find_by(id: params[:id])
     if @post.nil?
-      redirect_to user_path(current_user), alert: "投稿が見つかりませんでした"
+      redirect_to my_posts_path(current_user), alert: "投稿が見つかりませんでした"
     end
   end
 
@@ -47,9 +38,9 @@ class PostsController < ApplicationController
                          else
                            @post.published? ? '公開に変更されました' : '非公開に変更されました'
                          end
-        redirect_to user_path(current_user), notice: notice_message
+        redirect_to my_posts_path(current_user), notice: notice_message
       else
-        redirect_to user_path(current_user), notice: '変更はありませんでした'
+        redirect_to my_posts_path(current_user), notice: '変更はありませんでした'
       end
     else
       render :edit
@@ -59,7 +50,7 @@ class PostsController < ApplicationController
   def destroy
     @post = current_user.posts.find(params[:id])
     if @post.destroy
-      redirect_to user_path(current_user), notice: "投稿が削除されました"
+      redirect_to my_posts_path(current_user), notice: "投稿が削除されました"
     end
   end
 
