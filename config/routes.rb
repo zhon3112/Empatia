@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'my_posts/index'
   root "static_pages#top"
 
   get 'terms', to: 'pages#terms'
@@ -9,9 +10,9 @@ Rails.application.routes.draw do
   post 'login', to: 'user_sessions#create'
   delete 'logout', to: 'user_sessions#destroy'
 
-  resources :users, only: [:new, :show, :create]
+  resources :users, only: [:new, :create]
 
-  #resources :my_posts, only: [:index]
+  resources :my_posts, only: [:index]
   resources :my_likes, only: [:index]
 
   resources :posts do

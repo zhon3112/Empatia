@@ -5,11 +5,6 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def show
-    @post = Post.new
-    @posts = current_user.posts
-  end
-
   def create
     @user = User.new(user_params)
     if @user.terms_accepted?
