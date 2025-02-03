@@ -1,4 +1,10 @@
 <!---- _post.html.erbにrenderする用 --->
 <div>
-  <%= render 'first_like', post: post %>
+  <% if post.likes.where(like_type: 'like_first').exists? %>
+    <!-- いいねが押されている場合 -->
+    <%= render 'first_unlike', post: post %>
+  <% else %>
+    <!-- いいねが押されていない場合 -->
+    <%= render 'first_like', post: post %>
+  <% end %>
 </div>
