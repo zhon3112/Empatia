@@ -1,6 +1,7 @@
 <!--- _like_buttonsにrenderさせる --->
-<%= form_with url: post_likes_path(post.id, type: :like_first), method: :post, data: { turbo_stream: true }, html: { id: 'first-like', class: 'app-link like-button-1', style: 'display: inline;' } do %>
-  <button type="submit" class="flex items-center space-x-1 bg-fuchsia-300 text-white px-4 py-2 rounded-full hover:bg-teal-600">
+<%= form_with url: post_likes_path(post.id), method: :post, data: { turbo_stream: true }, html: { id: 'first-like', class: 'app-link like-button-1', style: 'display: inline;' } do %>
+  <%= hidden_field_tag :like_type, 'like_first' %>
+  <button type="submit" class="flex items-center space-x-1 bg-fuchsia-300 text-white px-4 py-2 hover:bg-teal-600">
     <i class="fa-thin fa-comment-heart"></i>
     <p class="text-xs"><%= post.likes.where(like_type: 'like_first').count %></p>
   </button>
