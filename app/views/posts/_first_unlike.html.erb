@@ -1,7 +1,12 @@
 <!--- _like_buttonsにrenderさせる --->
-<%= form_with url: post_like_path(post.id, post.likes.find_by(like_type: 'like_first').id), method: :delete, data: { turbo_stream: true }, html: { id: 'first-like-button', class: 'app-link like-button-1', style: 'display: inline;' } do %>
-  <button type="submit" class="flex items-center space-x-1 bg-pink-500 text-white px-4 py-2 rounded-full hover:bg-pink-700">
-    <i class="fa-solid fa-heart text-red-600"></i>
-    <p class="text-xs"><%= post.likes.where(like_type: 'like_first').count %></p>
-  </button>
+<% like = post.likes.find_by(like_type: 'like_first', user: current_user) %>
+<% if like %>
+  <%= form_with url: post_like_path(post, like), method: :delete, data: { turbo_stream: true }, html: { id: "first-like-button-#{post.id}" } do %>
+    <button type="submit" class="flex items-center space-x-1 bg-pink-500 text-white px-4 py-2 rounded-full hover:bg-pink-700">
+      <i class="fa-solid fa-heart text-red-600"></i>
+      <p class="text-xs" id="like-count-<%= post.id %>"><%= post.likes.where(like_type: 'like_first').count %></p>
+    </button>
+  <% end %>
+<% else %>
+  <%= render 'posts/first_like', post: post %>
 <% end %>

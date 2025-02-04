@@ -1,9 +1,9 @@
 <!--- _like_buttonsにrenderさせる --->
-<%= form_with url: post_likes_path(post.id), method: :post, data: { turbo_stream: true }, html: { id: 'first-like-button', class: 'app-link like-button-1', style: 'display: inline;' } do %>
+<%= form_with url: post_likes_path(post), method: :post, data: { turbo_stream: true }, html: { id: "first-like-button-#{post.id}" } do %>
   <%= hidden_field_tag :like_type, 'like_first' %>
-  <button type="submit" class="flex items-center space-x-1 text-gray400 px-4 py-2 hover:bg-teal-600">
+  <button type="submit" class="flex items-center space-x-1 text-gray-400 px-4 py-2 hover:bg-teal-600">
     <i class="fa-solid fa-heart text-blue-950 text-2xl"></i>
-    <p class="text-xs"><%= post.likes.where(like_type: 'like_first').count %></p>
+    <p class="text-xs" id="like-count-<%= post.id %>"><%= post.likes.where(like_type: 'like_first').count %></p>
   </button>
 <% end %>
 <!--- text-gray400：ボタン内の文字（アイコンとカウント数）の色を白 --->

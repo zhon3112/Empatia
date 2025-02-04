@@ -4,20 +4,25 @@ class LikesController < ApplicationController
 
   def create
     @post = Post.find(params[:post_id])
-    @like = current_user.likes.new(post_id: params[:post_id], like_type: params[:like_type])
-
-    if @like.save
+    # 既に同じユーザーのいいねが存在するか確認
+    @like = current_user.likes.find_or_initialize_by(post_id: @post.id, like_type: params[:like_type])
+    if @like.persisted?
+      # 既にいいねが存在する場合は何もしない
       respond_to do |format|
         format.turbo_stream
-        format.html { redirect_to @post, notice: 'いいねしました！' }
+        format.html { redirect_to @post, notice: 'すでにいいねしています。' }
       end
     else
-      # 保存失敗時のエラーログ出力
-      logger.error "Like creation failed: #{@like.errors.full_messages.join(', ')}"
-
-      respond_to do |format|
-        format.turbo_stream { head :unprocessable_entity }
-        format.html { redirect_to @post, alert: 'いいねに失敗しました。' }
+      if @like.save
+        respond_to do |format|
+          format.turbo_stream
+          format.html { redirect_to @post, notice: 'いいねしました！' }
+        end
+      else
+        respond_to do |format|
+          format.turbo_stream { head :unprocessable_entity }
+          format.html { redirect_to @post, alert: 'いいねに失敗しました。' }
+        end
       end
     end
   end
