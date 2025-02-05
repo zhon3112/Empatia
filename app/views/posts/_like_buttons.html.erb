@@ -1,10 +1,19 @@
 <!---- _post.html.erbにrenderする用 --->
-<div>
-  <% if post.likes.where(like_type: 'like_first').exists? %>
-    <!-- いいねが押されている場合 -->
-    <%= render 'first_unlike', post: post %>
+<!--- いいね1 --->
+<!-- いいね1 -->
+<div id="first-like-button-<%= post.id %>">
+  <% if post.likes.exists?(like_type: 'like_first', user: current_user) %>
+    <%= render 'posts/first_unlike', post: post %>
   <% else %>
-    <!-- いいねが押されていない場合 -->
-    <%= render 'first_like', post: post %>
+    <%= render 'posts/first_like', post: post %>
+  <% end %>
+</div>
+
+<!-- いいね2 -->
+<div id="second-like-button-<%= post.id %>">
+  <% if post.likes.exists?(like_type: 'like_second', user: current_user) %>
+    <%= render 'posts/second_unlike', post: post %>
+  <% else %>
+    <%= render 'posts/second_like', post: post %>
   <% end %>
 </div>

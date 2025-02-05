@@ -1,0 +1,15 @@
+<!--- _like_buttonsにrenderさせる --->
+<% like = post.likes.find_by(like_type: 'like_second', user: current_user) %>
+<% if like %>
+  <%= form_with url: post_like_path(post, like), method: :delete, data: { turbo_stream: true }, html: { id: "second-like-button-#{post.id}" } do %>
+    <%= hidden_field_tag :like_type, 'like_second' %> <!-- 追加 -->
+    <button type="submit" class="flex items-center space-x-1 text-gray-400 px-4 py-2">
+      <i class="fa-solid fa-heart-crack text-sky-600"></i>
+      <p class="text-xs" id="like-count-like_second-<%= post.id %>">
+        <%= post.likes.where(like_type: 'like_second').count %>
+      </p>
+    </button>
+  <% end %>
+<% else %>
+  <%= render 'posts/second_like', post: post %>
+<% end %>

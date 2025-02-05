@@ -1,9 +1,15 @@
-<!--- いいね1 --->
+<!-- いいね1 -->
 <%= turbo_stream.replace "first-like-button-#{@post.id}" do %>
   <%= render 'posts/first_unlike', post: @post %>
 <% end %>
-<%= turbo_stream.update "like-count-#{@post.id}" do %>
-  <p class="text-xs"><%= @post.likes.where(like_type: 'like_first').count %></p>
+<%= turbo_stream.update "like-count-like_first-#{@post.id}" do %>
+  <%= @post.likes.where(like_type: 'like_first').count %>
 <% end %>
 
-<!--- いいね2 --->
+<!-- いいね2 -->
+<%= turbo_stream.replace "second-like-button-#{@post.id}" do %>
+  <%= render 'posts/second_unlike', post: @post %>
+<% end %>
+<%= turbo_stream.update "like-count-like_second-#{@post.id}" do %>
+  <%= @post.likes.where(like_type: 'like_second').count %>
+<% end %>

@@ -1,12 +1,10 @@
 <!--- _like_buttonsにrenderさせる --->
 <%= form_with url: post_likes_path(post), method: :post, data: { turbo_stream: true }, html: { id: "first-like-button-#{post.id}" } do %>
   <%= hidden_field_tag :like_type, 'like_first' %>
-  <button type="submit" class="flex items-center space-x-1 text-gray-400 px-4 py-2 hover:bg-teal-600">
-    <i class="fa-solid fa-heart text-blue-950 text-2xl"></i>
-    <p class="text-xs" id="like-count-<%= post.id %>"><%= post.likes.where(like_type: 'like_first').count %></p>
+  <button type="submit" class="flex items-center space-x-1 text-gray-400 px-4 py-2">
+    <i class="fa-solid fa-heart text-blue-950"></i>
+    <p class="text-xs" id="like-count-like_first-<%= post.id %>"><%= post.likes.where(like_type: 'like_first').count %></p>
   </button>
 <% end %>
-<!--- text-gray400：ボタン内の文字（アイコンとカウント数）の色を白 --->
-<!--- hover:bg-teal-600：ホバー時に背景色が少し濃くなる --->
+<!--- text-gray400：カウント数の色 --->
 <!--- px-4 py-2：ボタンのパディングを調整 --->
-<!--- text-2xl：アイコンのサイズを調整 --->
