@@ -1,6 +1,9 @@
+<!--- いいね1 --->
 <%= turbo_stream.replace "first-like-button-#{@post.id}" do %>
   <%= render 'posts/first_unlike', post: @post %>
 <% end %>
 <%= turbo_stream.update "like-count-#{@post.id}" do %>
   <p class="text-xs"><%= @post.likes.where(like_type: 'like_first').count %></p>
 <% end %>
+
+<!--- いいね2 --->
