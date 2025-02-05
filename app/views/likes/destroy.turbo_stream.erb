@@ -5,3 +5,5 @@
 <%= turbo_stream.update "like-count-#{@post.id}" do %>
   <p class="text-xs"><%= @post.likes.where(like_type: 'like_first').count %></p>
 <% end %>
+
+<!--- いいね2 --->
