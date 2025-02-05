@@ -28,7 +28,7 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    @like = @post.likes.find_by(like_type: 'like_first', user: current_user)
+    @like = @post.likes.find_by(like_type: params[:like_type], user: current_user)
     if @like
       @like.destroy
     end
