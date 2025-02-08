@@ -1,0 +1,10 @@
+<!---いいね4　　_like_buttonsにrenderさせる--->
+<%= form_with url: post_likes_path(post), method: :post, data: { turbo_stream: true }, html: { id: "fourth-like-button-#{post.id}" } do %>
+  <%= hidden_field_tag :like_type, 'like_fourth' %>
+  <button type="submit" class="flex items-center space-x-1 text-gray-400 px-4 py-2">
+    <i class="fa-solid fa-face-grin-squint text-blue-950"></i>
+    <p class="text-xs" id="like-count-like_fourth-<%= post.id %>">
+      <%= post.likes.where(like_type: 'like_fourth').count %>
+    </p>
+  </button>
+<% end %>
