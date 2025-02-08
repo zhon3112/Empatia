@@ -4,7 +4,7 @@
   <%= form_with url: post_like_path(post, like), method: :delete, data: { turbo_stream: true }, html: { id: "first-like-button-#{post.id}" } do %>
     <%= hidden_field_tag :like_type, 'like_first' %> <!-- 追加 -->
     <button type="submit" class="flex items-center space-x-1 text-gray-400 px-4 py-2">
-      <i class="fa-solid fa-heart text-red-600"></i>
+      <i class="fa-solid fa-heart text-pink-600"></i>
       <p class="text-xs" id="like-count-like_first-<%= post.id %>">
         <%= post.likes.where(like_type: 'like_first').count %>
       </p>

@@ -1,6 +1,5 @@
 <!---- _post.html.erbにrenderする用 --->
-<!--- いいね1 --->
-<!-- いいね1 -->
+<!--- いいね1 いいね--->
 <div id="first-like-button-<%= post.id %>">
   <% if post.likes.exists?(like_type: 'like_first', user: current_user) %>
     <%= render 'posts/first_unlike', post: post %>
@@ -9,11 +8,47 @@
   <% end %>
 </div>
 
-<!-- いいね2 -->
+<!-- いいね2 悲しい-->
 <div id="second-like-button-<%= post.id %>">
   <% if post.likes.exists?(like_type: 'like_second', user: current_user) %>
     <%= render 'posts/second_unlike', post: post %>
   <% else %>
     <%= render 'posts/second_like', post: post %>
+  <% end %>
+</div>
+
+<!--- いいね3 怒る--->
+<div id="third-like-button-<%= post.id %>">
+  <% if post.likes.exists?(like_type: 'like_third', user: current_user) %>
+    <%= render 'posts/third_unlike', post: post %>
+  <% else %>
+    <%= render 'posts/third_like', post: post %>
+  <% end %>
+</div>
+
+<!--- いいね4 楽しい--->
+<div id="fourth-like-button-<%= post.id %>">
+  <% if post.likes.exists?(like_type: 'like_fourth', user: current_user) %>
+    <%= render 'posts/fourth_unlike', post: post %>
+  <% else %>
+    <%= render 'posts/fourth_like', post: post %>
+  <% end %>
+</div>
+
+<!--- いいね5 応援--->
+<div id="fifth-like-button-<%= post.id %>">
+  <% if post.likes.exists?(like_type: 'like_fifth', user: current_user) %>
+    <%= render 'posts/fifth_unlike', post: post %>
+  <% else %>
+    <%= render 'posts/fifth_like', post: post %>
+  <% end %>
+</div>
+
+<!--- いいね6 感謝--->
+<div id="sixth-like-button-<%= post.id %>">
+  <% if post.likes.exists?(like_type: 'like_sixth', user: current_user) %>
+    <%= render 'posts/sixth_unlike', post: post %>
+  <% else %>
+    <%= render 'posts/sixth_like', post: post %>
   <% end %>
 </div>
