@@ -52,3 +52,39 @@
     <%= render 'posts/sixth_like', post: post %>
   <% end %>
 </div>
+
+<!--- いいね7 驚き--->
+<div id="seventh-like-button-<%= post.id %>">
+  <% if post.likes.exists?(like_type: 'like_seventh', user: current_user) %>
+    <%= render 'posts/seventh_unlike', post: post %>
+  <% else %>
+    <%= render 'posts/seventh_like', post: post %>
+  <% end %>
+</div>
+
+<!--- いいね8 共感--->
+<div id="eighth-like-button-<%= post.id %>">
+  <% if post.likes.exists?(like_type: 'like_eighth', user: current_user) %>
+    <%= render 'posts/eighth_unlike', post: post %>
+  <% else %>
+    <%= render 'posts/eighth_like', post: post %>
+  <% end %>
+</div>
+
+<!--- いいね9 考える--->
+<div id="ninth-like-button-<%= post.id %>">
+  <% if post.likes.exists?(like_type: 'like_ninth', user: current_user) %>
+    <%= render 'posts/ninth_unlike', post: post %>
+  <% else %>
+    <%= render 'posts/ninth_like', post: post %>
+  <% end %>
+</div>
+
+<!--- いいね10 素晴らしい --->
+<div id="tenth-like-button-<%= post.id %>">
+  <% if post.likes.exists?(like_type: 'like_tenth', user: current_user) %>
+    <%= render 'posts/tenth_unlike', post: post %>
+  <% else %>
+    <%= render 'posts/tenth_like', post: post %>
+  <% end %>
+</div>
