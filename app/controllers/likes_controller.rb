@@ -4,9 +4,7 @@ class LikesController < ApplicationController
 
   def create
     Rails.logger.debug "Params received: #{params.inspect}"
-    Rails.logger.debug "Creating like for post_id: #{params[:post_id]}, user_id: #{current_user.id}, like_type: #{params[:like_type]}"
-
-    @post = Post.find(params[:post_id])
+    Rails.logger.debug "Creating like for post_id: #{@post.id}, user_id: #{current_user.id}, like_type: #{params[:like_type]}"
 
     # 既に同じユーザーのいいねが存在するか確認
     @like = current_user.likes.find_or_initialize_by(post_id: @post.id, like_type: params[:like_type])

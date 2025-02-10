@@ -3,7 +3,12 @@ class PostsController < ApplicationController
 
   def index
     @q = Post.ransack(params[:q])
-    @posts = @q.result(distinct: true).published.where.not(user_id: current_user.id)
+    @posts = @q.result(distinct: true)
+               .includes(:user, :likes)
+               .published
+               .where.not(user_id: current_user.id)
+    @likes_by_post = Like.where(post_id: @posts.map(&:id))
+                         .group_by(&:post_id)
     @message = @posts.empty? ? "検索結果はありませんでした" : nil
   end
 
