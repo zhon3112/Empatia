@@ -1,79 +1,81 @@
-<!-- いいね1 -->
-<%= turbo_stream.replace "first-like-button-#{@post.id}" do %>
-  <%= render 'posts/first_unlike', post: @post %>
-<% end %>
-<%= turbo_stream.update "like-count-like_first-#{@post.id}" do %>
-  <%= @post.likes.where(like_type: 'like_first').count %>
-<% end %>
+<% case params[:like_type] %>
+<% when 'like_first' %>
+  <%= turbo_stream.replace "first-like-button-#{@post.id}" do %>
+    <%= render 'posts/first_unlike', post: @post %>
+  <% end %>
+  <%= turbo_stream.update "like-count-like_first-#{@post.id}" do %>
+    <%= @post.likes.where(like_type: 'like_first').count %>
+  <% end %>
 
-<!-- いいね2 -->
-<%= turbo_stream.replace "second-like-button-#{@post.id}" do %>
-  <%= render 'posts/second_unlike', post: @post %>
-<% end %>
-<%= turbo_stream.update "like-count-like_second-#{@post.id}" do %>
-  <%= @post.likes.where(like_type: 'like_second').count %>
-<% end %>
+<% when 'like_second' %>
+  <%= turbo_stream.replace "second-like-button-#{@post.id}" do %>
+    <%= render 'posts/second_unlike', post: @post %>
+  <% end %>
+  <%= turbo_stream.update "like-count-like_second-#{@post.id}" do %>
+    <%= @post.likes.where(like_type: 'like_second').count %>
+  <% end %>
 
-<!-- いいね3 -->
-<%= turbo_stream.replace "third-like-button-#{@post.id}" do %>
-  <%= render 'posts/third_unlike', post: @post %>
-<% end %>
-<%= turbo_stream.update "like-count-like_third-#{@post.id}" do %>
-  <%= @post.likes.where(like_type: 'like_third').count %>
-<% end %>
+<% when 'like_third' %>
+  <%= turbo_stream.replace "third-like-button-#{@post.id}" do %>
+    <%= render 'posts/third_unlike', post: @post %>
+  <% end %>
+  <%= turbo_stream.update "like-count-like_third-#{@post.id}" do %>
+    <%= @post.likes.where(like_type: 'like_third').count %>
+  <% end %>
 
-<!-- いいね4 -->
-<%= turbo_stream.replace "fourth-like-button-#{@post.id}" do %>
-  <%= render 'posts/fourth_unlike', post: @post %>
-<% end %>
-<%= turbo_stream.update "like-count-like_fourth-#{@post.id}" do %>
-  <%= @post.likes.where(like_type: 'like_fourth').count %>
-<% end %>
+<% when 'like_fourth' %>
+  <%= turbo_stream.replace "fourth-like-button-#{@post.id}" do %>
+    <%= render 'posts/fourth_unlike', post: @post %>
+  <% end %>
+  <%= turbo_stream.update "like-count-like_fourth-#{@post.id}" do %>
+    <%= @post.likes.where(like_type: 'like_fourth').count %>
+  <% end %>
 
-<!-- いいね5 -->
-<%= turbo_stream.replace "fifth-like-button-#{@post.id}" do %>
-  <%= render 'posts/fifth_unlike', post: @post %>
-<% end %>
-<%= turbo_stream.update "like-count-like_fifth-#{@post.id}" do %>
-  <%= @post.likes.where(like_type: 'like_fifth').count %>
-<% end %>
+<% when 'like_fifth' %>
+  <%= turbo_stream.replace "fifth-like-button-#{@post.id}" do %>
+    <%= render 'posts/fifth_unlike', post: @post %>
+  <% end %>
+  <%= turbo_stream.update "like-count-like_fifth-#{@post.id}" do %>
+    <%= @post.likes.where(like_type: 'like_fifth').count %>
+  <% end %>
 
-<!-- いいね6 -->
-<%= turbo_stream.replace "sixth-like-button-#{@post.id}" do %>
-  <%= render 'posts/sixth_unlike', post: @post %>
-<% end %>
-<%= turbo_stream.update "like-count-like_sixth-#{@post.id}" do %>
-  <%= @post.likes.where(like_type: 'like_sixth').count %>
-<% end %>
+<% when 'like_sixth' %>
+  <%= turbo_stream.replace "sixth-like-button-#{@post.id}" do %>
+    <%= render 'posts/sixth_unlike', post: @post %>
+  <% end %>
+  <%= turbo_stream.update "like-count-like_sixth-#{@post.id}" do %>
+    <%= @post.likes.where(like_type: 'like_sixth').count %>
+  <% end %>
 
-<!-- いいね7 -->
-<%= turbo_stream.replace "seventh-like-button-#{@post.id}" do %>
-  <%= render 'posts/seventh_unlike', post: @post %>
-<% end %>
-<%= turbo_stream.update "like-count-like_seventh-#{@post.id}" do %>
-  <%= @post.likes.where(like_type: 'like_seventh').count %>
-<% end %>
+<% when 'like_seventh' %>
+  <%= turbo_stream.replace "seventh-like-button-#{@post.id}" do %>
+    <%= render 'posts/seventh_unlike', post: @post %>
+  <% end %>
+  <%= turbo_stream.update "like-count-like_seventh-#{@post.id}" do %>
+    <%= @post.likes.where(like_type: 'like_seventh').count %>
+  <% end %>
 
-<!-- いいね8 -->
-<%= turbo_stream.replace "eighth-like-button-#{@post.id}" do %>
-  <%= render 'posts/eighth_unlike', post: @post %>
-<% end %>
-<%= turbo_stream.update "like-count-like_eighth-#{@post.id}" do %>
-  <%= @post.likes.where(like_type: 'like_eighth').count %>
-<% end %>
+<% when 'like_eighth' %>
+  <%= turbo_stream.replace "eighth-like-button-#{@post.id}" do %>
+    <%= render 'posts/eighth_unlike', post: @post %>
+  <% end %>
+  <%= turbo_stream.update "like-count-like_eighth-#{@post.id}" do %>
+    <%= @post.likes.where(like_type: 'like_eighth').count %>
+  <% end %>
 
-<!-- いいね9 -->
-<%= turbo_stream.replace "ninth-like-button-#{@post.id}" do %>
-  <%= render 'posts/ninth_unlike', post: @post %>
-<% end %>
-<%= turbo_stream.update "like-count-like_ninth-#{@post.id}" do %>
-  <%= @post.likes.where(like_type: 'like_ninth').count %>
-<% end %>
+<% when 'like_ninth' %>
+  <%= turbo_stream.replace "ninth-like-button-#{@post.id}" do %>
+    <%= render 'posts/ninth_unlike', post: @post %>
+  <% end %>
+  <%= turbo_stream.update "like-count-like_ninth-#{@post.id}" do %>
+    <%= @post.likes.where(like_type: 'like_ninth').count %>
+  <% end %>
 
-<!-- いいね10 -->
-<%= turbo_stream.replace "tenth-like-button-#{@post.id}" do %>
-  <%= render 'posts/tenth_unlike', post: @post %>
-<% end %>
-<%= turbo_stream.update "like-count-like_tenth-#{@post.id}" do %>
-  <%= @post.likes.where(like_type: 'like_tenth').count %>
+<% when 'like_tenth' %>
+  <%= turbo_stream.replace "tenth-like-button-#{@post.id}" do %>
+    <%= render 'posts/tenth_unlike', post: @post %>
+  <% end %>
+  <%= turbo_stream.update "like-count-like_tenth-#{@post.id}" do %>
+    <%= @post.likes.where(like_type: 'like_tenth').count %>
+  <% end %>
 <% end %>

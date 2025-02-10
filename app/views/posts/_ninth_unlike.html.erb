@@ -6,7 +6,7 @@
     <button type="submit" class="flex items-center space-x-1 text-gray-400 px-4 py-2">
       <i class="fa-solid fa-face-meh text-amber-300"></i>
       <p class="text-xs" id="like-count-like_ninth-<%= post.id %>">
-        <%= post.likes.where(like_type: 'like_ninth').count %>
+        <%= (@likes_by_post && @likes_by_post[post.id]&.count { |l| l.like_type == 'like_ninth' } || 0) %>
       </p>
     </button>
   <% end %>
