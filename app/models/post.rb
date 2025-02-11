@@ -15,6 +15,6 @@ class Post < ApplicationRecord
 
   # いいねしているかどうかの判断
   def liked_by?(user, like_type)
-    likes.exists?(user_id: user.id, like_type: like_type)
+    likes.any? { |like| like.user_id == user.id && like.like_type == like_type }
   end
 end

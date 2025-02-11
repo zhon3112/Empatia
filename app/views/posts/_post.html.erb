@@ -4,6 +4,6 @@
       <div class="card-body">
         <p class="text-black text-lg"><%= post.content %></p>
       </div>
-      <%= render 'like_buttons', post: post %>
+      <%= render 'like_buttons', post: post, likes: @likes_by_post[post.id] %>
     </div>
 <% end %>
