@@ -1,15 +1,12 @@
 <!--- いいね8  _like_buttonsにrenderさせる --->
-<% like = post.likes.find_by(like_type: 'like_eighth', user: current_user) %>
-<% if like %>
-  <%= form_with url: post_like_path(post, like), method: :delete, data: { turbo_stream: true }, html: { id: "eighth-like-button-#{post.id}" } do %>
-    <%= hidden_field_tag :like_type, 'like_eighth' %>
-    <button type="submit" class="flex items-center space-x-1 text-gray-400 px-4 py-2">
-      <i class="fa-solid fa-handshake text-orange-200"></i>
-      <p class="text-xs" id="like-count-like_eighth-<%= post.id %>">
-        <%= (@likes_by_post && @likes_by_post[post.id]&.count { |l| l.like_type == 'like_eighth' } || 0) %>
-      </p>
-    </button>
-  <% end %>
-<% else %>
-  <%= render 'posts/eighth_like', post: post %>
+<% like = @user_likes[post.id]&.find { |l| l.like_type == 'like_eighth' } %>
+
+<%= form_with url: post_like_path(post, like), method: :delete, data: { turbo_stream: true }, html: { id: "like_eighth-like-button-#{post.id}" } do %>
+  <%= hidden_field_tag :like_type, 'like_eighth' %>
+  <button type="submit" class="flex items-center space-x-1 text-gray-400 px-4 py-2">
+    <i class="fa-solid fa-handshake text-orange-200"></i>
+    <p class="text-xs" id="like-count-like_eighth-<%= post.id %>">
+      <%= @likes_by_post[post.id]&.count { |l| l.like_type == 'like_eighth' } || 0 %>
+    </p>
+  </button>
 <% end %>

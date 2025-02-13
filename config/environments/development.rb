@@ -9,7 +9,7 @@ Rails.application.configure do
     Bullet.rails_logger  = true
     Bullet.add_footer    = true
 
-    ActiveRecord::Base.logger = Logger.new(STDOUT)
+    ActiveRecord::Base.logger.level = Logger::DEBUG
   end
 
   # Settings specified here will take precedence over those in config/application.rb.
