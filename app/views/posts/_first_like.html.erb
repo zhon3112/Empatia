@@ -4,7 +4,7 @@
   <button type="submit" class="flex items-center space-x-1 text-gray-400 px-4 py-2">
     <i class="fa-solid fa-heart text-blue-950"></i>
     <p class="text-xs" id="like-count-like_first-<%= post.id %>">
-      <%= (@likes_by_post && @likes_by_post[post.id]&.count { |l| l.like_type == 'like_first' } || 0) %>
+      <%= @likes_by_post[post.id]&.count { |l| l.like_type == 'like_first' } || 0 %>
     </p>
   </button>
 <% end %>
