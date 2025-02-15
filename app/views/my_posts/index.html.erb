@@ -8,9 +8,9 @@
       <div class="card-body">
         <p class="text-black text-lg"><%= post.content %></p>
       </div>
+      <%= render 'posts/like_buttons', post: post, likes: @likes_by_post[post.id] %>
       <%= link_to '編集', edit_post_path(post), id: "post_#{post.id}", class: 'btn btn-active btn-ghost' %>
       <%= link_to '削除', post_path(post), id: "button-delete-#{post.id}", data: { turbo_method: :delete }, class: 'btn btn-active btn-ghost' %>
-      <%= render 'posts/like_buttons', post: post, likes: @likes_by_post[post.id] %>
     </div>
   </div>
 <% end %>

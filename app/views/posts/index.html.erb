@@ -1,14 +1,37 @@
-<h1 class="inline-block text-2xl text-blue-400">一覧</h1>
-
 <h2>検索欄</h2>
 <%= render 'search_form', q: @q, url: posts_path %>
 <% if @message %>
   <p><%= @message %></p>
 <% end %>
 
+<div role="tablist" class="tabs tabs-bordered">
+  <div role="tab" class="tab">
+    <%= link_to 'みんなの投稿', posts_path(current_user.id), class: 'tab-link' %>
+  </div>
+  <div role="tabpanel" class="tab-content p-10">
+  </div>
+
+  <div role="tab" class="tab">
+    <%= link_to '自分の投稿', my_posts_path(current_user), class: 'tab-link', id: 'self-posts-tab' %>
+  </div>
+  <div role="tabpanel" class="tab-content p-10">
+  </div>
+
+  <div role="tab" class="tab">
+    <%= link_to 'いいね一覧', my_likes_path(current_user), class: 'tab-link' %>
+  </div>
+  <div role="tabpanel" class="tab-content p-10">
+  </div>
+</div>
+
+
 <br>
-<h2 class="inline-block text-lg text-blue-300">みんなの投稿</h2>
-  <% if @posts.present? %>
-    <%= render @posts %>
-  <% end %>
+<% @posts.each do |post| %>
+    <div class="card bg-blue-50 w-96 border border-gray-300">
+      <div class="card-body">
+        <p class="text-black text-lg"><%= post.content %></p>
+      </div>
+      <%= render 'like_buttons', post: post, likes: @likes_by_post[post.id] %>
+    </div>
+<% end %>
 </br>

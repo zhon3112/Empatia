@@ -1,57 +1,53 @@
 class LikesController < ApplicationController
   before_action :require_login
-  before_action :set_post, only: [:create, :destroy]
+  before_action :update_like_data, only: [:create, :destroy]
 
   def create
-    Rails.logger.debug "Params received: #{params.inspect}"
-    Rails.logger.debug "Creating like for post_id: #{@post.id}, user_id: #{current_user.id}, like_type: #{params[:like_type]}"
-
-    # 既に同じユーザーのいいねが存在するか確認
+    @post = Post.find(params[:post_id])
     @like = current_user.likes.find_or_initialize_by(post_id: @post.id, like_type: params[:like_type])
-    Rails.logger.debug "Found like: #{@like.persisted? ? 'Already exists' : 'New like'}"
 
     if @like.persisted?
-      Rails.logger.debug "Like already exists for post_id: #{@post.id}, user_id: #{current_user.id}"
-      respond_to do |format|
-        format.turbo_stream
-        format.html { redirect_to @post, notice: 'すでにいいねしています。' }
-      end
-    else
-      if @like.save
-        Rails.logger.debug "Like saved successfully: #{@like.inspect}"
-        respond_to do |format|
-          format.turbo_stream
-          format.html { redirect_to @post, notice: 'いいねしました！' }
-        end
-      else
-        Rails.logger.error "Failed to save like: #{@like.errors.full_messages}"
-        respond_to do |format|
-          format.turbo_stream { head :unprocessable_entity }
-          format.html { redirect_to @post, alert: 'いいねに失敗しました。' }
-        end
-      end
-    end
-  end
-
-  def destroy
-    @like = @post.likes.find_by(like_type: params[:like_type], user: current_user)
-    if @like
-      Rails.logger.debug "Destroying like for post_id: #{@post.id}, user_id: #{current_user.id}, like_type: #{params[:like_type]}"
       @like.destroy
       Rails.logger.debug "Like successfully destroyed."
     else
-      Rails.logger.warn "No like found to destroy for post_id: #{@post.id}, user_id: #{current_user.id}, like_type: #{params[:like_type]}"
+      if @like.save
+        Rails.logger.debug "Like saved successfully"
+      else
+        Rails.logger.error "Failed to save like"
+        return head :unprocessable_entity
+      end
     end
 
+    update_like_data
+
     respond_to do |format|
-      format.turbo_stream
-      format.html { redirect_to post_path(@post) }
+      format.turbo_stream { render "likes/create" } # **destroy の場合も create を使う**
+    end
+  end
+
+
+  def destroy
+    @post = Post.find(params[:post_id])
+    @like = @post.likes.find_by(like_type: params[:like_type], user: current_user)
+    if @like
+      @like.destroy
+      Rails.logger.debug "Like successfully destroyed."
+    else
+      Rails.logger.warn "No like found to destroy."
+    end
+
+    # ここでデータを最新に更新
+    update_like_data
+
+    respond_to do |format|
+      format.turbo_stream { render "likes/destroy" } # 明示的に `destroy.turbo_stream.erb` を指定
     end
   end
 
   private
 
-  def set_post
-    @post = Post.find(params[:post_id])
+  def update_like_data
+    @user_likes = current_user.likes.group_by(&:post_id) # **ユーザーのいいねデータを更新**
+    @likes_by_post = Like.group_by_post # **全体のいいねデータを更新**
   end
 end
