@@ -1,9 +1,0 @@
-<!--- 投稿のデザイン(indexにrenderする) --->
-<% @posts.each do |post| %>
-    <div class="card bg-blue-50 w-96 border border-gray-300">
-      <div class="card-body">
-        <p class="text-black text-lg"><%= post.content %></p>
-      </div>
-      <%= render 'like_buttons', post: post, likes: @likes_by_post[post.id] %>
-    </div>
-<% end %>
