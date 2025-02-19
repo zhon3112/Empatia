@@ -7,6 +7,10 @@ class PostsController < ApplicationController
     @likes_by_post = Like.where(post_id: @posts.map(&:id)).group_by(&:post_id) # 投稿ごとの全いいね数を事前に取得
     @user_likes = Like.where(user_id: current_user.id, post_id: @posts.map(&:id)).group_by(&:post_id) # ユーザーがいいねしたデータを事前取得
     @message = @posts.empty? ? "検索結果はありませんでした" : nil
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def new

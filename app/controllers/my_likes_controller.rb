@@ -2,7 +2,10 @@ class MyLikesController < ApplicationController
   before_action :require_login
 
   def index
-    @posts = current_user.posts.eager_load(:likes)
-    @user_likes = @posts.joins(:likes).group_by(&:id)
+    @posts = Post.joins(:likes).where(likes: { user_id: current_user.id }).eager_load(:likes)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 end

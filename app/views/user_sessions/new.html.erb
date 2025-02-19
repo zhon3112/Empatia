@@ -13,8 +13,4 @@
   <div>
     <%= f.submit 'Login', class: "btn btn-primary" %>
   </div>
-
-  <% if current_user %>
-    <%= link_to 'Login', posts_path(current_user) %>
-  <% end %>
 <% end %>

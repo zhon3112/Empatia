@@ -49,6 +49,8 @@ gem "bootsnap", require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem 'better_errors'
+  gem 'binding_of_caller'
   gem "debug", platforms: %i[ mri windows ]
 end
 
@@ -77,3 +79,5 @@ gem 'sorcery'
 gem 'ransack', '4.2.0'
 
 gem 'meta-tags'
+
+gem 'jquery-rails'
