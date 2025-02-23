@@ -10,10 +10,10 @@
     <span class="tab-link active">みんなの投稿</span>
   </div>
   <div role="tab" class="tab">
-    <%= link_to '自分の投稿', my_posts_path(current_user), data: { turbo_method: :get, action: "click->tab#switch" } %>
+    <%= link_to '自分の投稿', my_posts_path(current_user) %>
   </div>
   <div role="tab" class="tab">
-    <%= link_to 'いいね一覧', my_likes_path(current_user), data: { turbo_method: :get, action: "click->tab#switch" } %>
+    <%= link_to 'いいね一覧', my_likes_path(current_user) %>
   </div>
 </div>
 

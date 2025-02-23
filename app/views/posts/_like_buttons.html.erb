@@ -1,4 +1,4 @@
-<!---- index.html.erbにrenderする用 --->
+<!---- _post.html.erbにrenderする用 --->
 <% ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth'].each do |num| %>
   <% like_type = "like_#{num}" %>
   <% user_liked = @user_likes&.dig(post.id)&.any? { |l| l.like_type == like_type } %>
