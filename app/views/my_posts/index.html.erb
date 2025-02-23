@@ -28,26 +28,19 @@
 <!--- ページ用のタブ --->
 <div role="tablist" class="tabs tabs-bordered">
   <div role="tab" class="tab">
-    <%= link_to 'みんなの投稿', posts_path, remote: true %>
+    <%= link_to 'みんなの投稿', posts_path %>
   </div>
   <div role="tab" class="tab">
     <span class="tab-link active">自分の投稿</span>
   </div>
   <div role="tab" class="tab">
-    <%= link_to 'いいね一覧', my_likes_path(current_user), remote: true %>
+    <%= link_to 'いいね一覧', my_likes_path(current_user) %>
   </div>
 </div>
 
 <!--- 自分の投稿を表示 --->
 <div id="tab-content">
   <% @posts.each do |post| %>
-    <div class="card bg-violet-50 w-96 border border-gray-300">
-      <div class="card-body">
-        <p class="text-black text-lg"><%= post.content %></p>
-      </div>
-      <%= render 'posts/like_buttons', post: post, likes: @likes_by_post[post.id] %>
-      <%= link_to '編集', edit_post_path(post), id: "post_#{post.id}", class: 'btn btn-active btn-ghost' %>
-      <%= link_to '削除', post_path(post), id: "button-delete-#{post.id}", data: { turbo_method: :delete }, class: 'btn btn-active btn-ghost' %>
-    </div>
+    <%= render 'my_posts/post', post: post, likes: @likes_by_post[post.id] %>
   <% end %>
 </div>

@@ -1,13 +1,20 @@
-<p>自分のした良いね一覧を表示させる</p>
+<h2>いいね一覧</h2>
 <!--- ページ用のタブ --->
 <div role="tablist" class="tabs tabs-bordered">
   <div role="tab" class="tab">
-    <%= link_to 'みんなの投稿', posts_path, remote: true %>
+    <%= link_to 'みんなの投稿', posts_path %>
   </div>
   <div role="tab" class="tab">
-    <%= link_to '自分の投稿', my_posts_path, remote: true %>
+    <%= link_to '自分の投稿', my_posts_path(current_user) %>
   </div>
   <div role="tab" class="tab">
     <span class="tab-link active">いいね一覧</span>
   </div>
+</div>
+
+<!--- いいね一覧 --->
+<div id="tab-content">
+  <% @posts.each do |post| %>
+  <%= render "my_likes/post", post: post %>
+  <% end %>
 </div>

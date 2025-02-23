@@ -1,8 +1,7 @@
-<!--- みんなの投稿 --->
-<div class="card bg-blue-50 w-96 border border-gray-300">
+<!---- いいねした投稿のデザイン --->
+<div class="card bg-green-50 w-96 border border-gray-300">
   <div class="card-body">
     <p class="text-black text-lg"><%= post.content %></p>
     <p class="text-gray-500 text-sm"><%= post.created_at.strftime("%Y/%m/%d %H:%M") %></p>
   </div>
-  <%= render 'posts/like_buttons', post: post, likes: likes_by_post[post.id] %>
 </div>
