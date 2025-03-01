@@ -32,4 +32,10 @@
 	</div>
 
 	<%= f.submit "登録", class: "btn btn-primary" %>
+
+	<div>
+  <%= link_to auth_at_provider_path(provider: :google) do %>
+    <%= image_tag "google_sign_up.png" %>
+  <% end %>
+  </div>
 <% end %>

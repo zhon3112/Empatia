@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get 'oauths/oauth'
+
+  post 'oauth/callback' => 'oauths#callback'
+  get 'oauth/callback' => 'oauths#callback'
+  get 'oauth/:provider' => 'oauths#oauth', :as => :auth_at_provider
+
+  get 'oauths/callback'
   get 'my_posts/index'
   root "static_pages#top"
 

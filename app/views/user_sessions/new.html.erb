@@ -13,4 +13,10 @@
   <div>
     <%= f.submit 'Login', class: "btn btn-primary" %>
   </div>
+
+  <div>
+  <%= link_to auth_at_provider_path(provider: :google) do %>
+    <%= image_tag "google_sign_in.png" %>
+  <% end %>
+  </div>
 <% end %>

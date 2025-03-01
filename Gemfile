@@ -81,3 +81,5 @@ gem 'ransack', '4.2.0'
 gem 'meta-tags'
 
 gem 'jquery-rails'
+
+gem 'config'
