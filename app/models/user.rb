@@ -1,5 +1,7 @@
 class User < ApplicationRecord
-	authenticates_with_sorcery!
+  authenticates_with_sorcery!
+	has_many :authentications, dependent: :destroy
+	accepts_nested_attributes_for :authentications
 	has_many :likes, dependent: :destroy
 	has_many :liked_posts, through: :likes, source: :post
 	has_many :posts

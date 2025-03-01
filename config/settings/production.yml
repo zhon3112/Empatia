@@ -1,0 +1,2 @@
+sorcery:
+    google_callback_url: 'https://www.app-empatia.com/oauth/callback?provider=google'
