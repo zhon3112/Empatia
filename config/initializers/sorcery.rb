@@ -158,8 +158,8 @@ Rails.application.config.sorcery.configure do |config|
   # config.auth0.callback_url = "https://0.0.0.0:3000/oauth/callback?provider=auth0"
   # config.auth0.site = "https://example.auth0.com"
   #
-  config.google.key = Rails.application.credentials.dig(:google, :google_client_id) # credentials.ymlから情報を取得
-  config.google.secret = Rails.application.credentials.dig(:google, :google_client_secret)
+  config.google.key = ENV["GOOGLE_CLIENT_ID"]
+  config.google.secret = ENV["GOOGLE_CLIENT_SECRET"]
   config.google.callback_url = Settings.sorcery[:google_callback_url]
   config.google.user_info_mapping = {:email => "email", :username => "name"} # 外部サービスから取得したユーザー情報をUserモデルの指定した属性にマッピング
   # config.google.scope = "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
@@ -243,7 +243,6 @@ Rails.application.config.sorcery.configure do |config|
   # config.battlenet.scope = "openid"
   # --- user config ---
   config.user_config do |user|
-    user.authentications_class = Authentication #外部サービスとの認証情報を保存するモデルを指定
     # -- core --
     # Specify username attributes, for example: [:username, :email].
     # Default: `[:email]`
@@ -544,7 +543,7 @@ Rails.application.config.sorcery.configure do |config|
     # Class which holds the various external provider data for this user.
     # Default: `nil`
     #
-    # user.authentications_class =
+    user.authentications_class = Authentication
 
     # User's identifier in the `authentications` class.
     # Default: `:user_id`
