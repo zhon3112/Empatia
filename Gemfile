@@ -82,4 +82,6 @@ gem 'meta-tags'
 
 gem 'jquery-rails'
 
+gem 'dotenv-rails'
+
 gem 'config'
