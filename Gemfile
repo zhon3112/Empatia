@@ -73,15 +73,25 @@ group :test do
   gem "selenium-webdriver"
 end
 
-
+# ユーザー登録・ログインで使用
 gem 'sorcery'
 
+# 検索機能で使用
 gem 'ransack', '4.2.0'
 
+# 静的OGPで使用
 gem 'meta-tags'
 
 gem 'jquery-rails'
 
+# .envファイルで使用
 gem 'dotenv-rails'
 
+# Google認証で使用
 gem 'config'
+
+# RSpecで使用
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+end
