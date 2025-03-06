@@ -67,10 +67,12 @@ group :development do
   gem 'bullet'
 end
 
+# systemspecで使用
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem "webdrivers"
 end
 
 # ユーザー登録・ログインで使用
