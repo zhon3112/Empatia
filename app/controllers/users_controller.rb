@@ -7,16 +7,11 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if @user.terms_accepted?
-      if @user.save
-        auto_login(@user)
-        redirect_to posts_path, notice: "ユーザーが作成されました"
-      else
-        flash.now[:alert] = "パスワードは8文字で作成してください"
-        render :new, status: :unprocessable_entity
-      end
+    if @user.save
+      auto_login(@user)
+      redirect_to posts_path, notice: "ユーザーが作成されました"
     else
-      flash.now[:alert] = "利用規約に同意する必要があります"
+      flash.now[:alert] = "ユーザー登録に失敗しました"
       render :new, status: :unprocessable_entity
     end
   end
