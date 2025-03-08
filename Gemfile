@@ -92,6 +92,9 @@ gem 'dotenv-rails'
 # Google認証で使用
 gem 'config'
 
+# i18nで使用
+gem 'rails-i18n'
+
 # RSpecで使用
 group :development, :test do
   gem 'rspec-rails'
