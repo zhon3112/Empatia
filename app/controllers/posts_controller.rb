@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :require_login
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def index
     @q = Post.ransack(params[:q])
@@ -57,6 +58,15 @@ class PostsController < ApplicationController
   end
 
   private
+
+  # 不正アクセスを防ぐ
+  def ensure_correct_user
+    post = Post.find(params[:id]) # 投稿を取得
+    if post.user_id != current_user.id # 投稿のユーザーIDと現在のユーザーIDを比較
+      flash[:alert] = "権限がありません、不正アクセスです！"
+      redirect_to posts_path
+    end
+  end
 
   def post_params
     params.require(:post).permit(:content, :status, :id)# postパラメーターの中から必要な属性を許可する
