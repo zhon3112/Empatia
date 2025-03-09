@@ -1,4 +1,6 @@
 class MyPostsController < ApplicationController
+  before_action :require_login
+
   def index
     @post = Post.new
     @posts = current_user.posts.eager_load(:likes)
