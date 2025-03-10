@@ -319,7 +319,7 @@ Rails.application.config.sorcery.configure do |config|
     # How long in seconds the session length will be
     # Default: `60 * 60 * 24 * 7`
     #
-    user.remember_me_for = 20 # 試しに20秒に設定
+    user.remember_me_for = 2592000 # 1ヶ月
 
     # When true, sorcery will persist a single remember me token for all
     # logins/logouts (to support remembering on multiple browsers simultaneously).
