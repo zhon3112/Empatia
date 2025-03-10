@@ -11,6 +11,11 @@
   </div>
 
   <div>
+    <%= check_box_tag :remember_me, params[:remember_me], true %>
+    <%= f.label :remember_me, '次回から自動でログインしますか？' %>
+  </div>
+
+  <div>
     <%= f.submit 'Login', class: "btn btn-primary" %>
   </div>
 
