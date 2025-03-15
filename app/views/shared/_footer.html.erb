@@ -1,19 +1,12 @@
 <footer>
-  <div class="bg-blue-400">
-		<div class="footer-list">
-    <!-- 文字の大きさと色 -->
-      <div class="flex md:text-base gap-2 md:gap-10 justify-around md:justify-center text-xl text-white">
-        <%= link_to 'Terms of Use', terms_path %>
-        <%= link_to 'Privacy Policy', privacy_policy_path %>
-
-        <a href="https://x.com/zhon3112" target="_blank">
-          <i class="fa-brands fa-twitter"></i>
-        </a>
-        <a href="https://github.com/zhon3112" target="_blank">
-          <i class="fa-brands fa-github"></i>
-        </a>
-        <a href="https://forms.gle/tXDb1uZ2Z4Q9yJJG8" target="_blank">お問い合せ</a>
-      </div>
-		</div>
+  <div class="container mx-auto flex flex-col items-center">
+		<div class="flex flex-col md:flex-row gap-4 md:gap-10 text-base md:text-sm lg:text-base text-serif text-white/50 justify-center text-center">
+      <%= link_to 'Terms of Use', terms_path, class: "hover:underline" %>
+      <%= link_to 'Privacy Policy', privacy_policy_path, class: "hover:underline" %>
+      <a href="https://forms.gle/tXDb1uZ2Z4Q9yJJG8" target="_blank" class="hover:underline">お問い合せ</a>
+    </div>
+    <div class="mt-2 text-serif text-white/50 text-sm text-center">
+      Copyright © 2025 - Empatia
+    </div>
   </div>
 </footer>

@@ -1,12 +1,10 @@
 <header>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-	<div class="bg-blue-400">
-		<!-- 文字の大きさと色 -->
-		<h1 class="inline-block text-5xl text-white">Empatia</h1>
-			<div class="flex md:text-base gap-2 md:gap-10 flex justify-end text-xl text-white">
-				<%= link_to '自分の投稿', my_posts_path(current_user) %>
-				<%= link_to 'Logout', logout_path, class: 'dropdown-item', data: { turbo_method: :delete } %>
-			</div>
+	<div class="container mx-auto flex justify-end items-center px-4">
+		<div class="flex gap-4 md:gap-8 text-serif text-white/50 text-base md:text-lg lg:text-xl">
+			<%= link_to 'My Post', my_posts_path(current_user), class: 'hover:underline' %>
+			<%= link_to 'Logout', logout_path, class: 'hover:underline', data: { turbo_method: :delete } %>
+		</div>
 	</div>
 </header>

@@ -14,7 +14,11 @@
   </head>
 
   <!-- 背景色 -->
-  <body class="bg-white">
+  <body class="relative bg-cover bg-center bg-fixed" style="background-image: url('<%= asset_path("top.jpg") %>');">
+    <!-- オーバーレイ（全体を暗くする） -->
+    <div class="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"></div>
+    <!--- オーバーレイより前面にする --->
+    <div class="relative z-10">
     <% if logged_in? %>
       <%= render 'shared/header' %>
     <% else %>
@@ -23,5 +27,6 @@
     <%= render 'shared/flash_message' %>
     <%= yield %>
     <%= render 'shared/footer' %>
+    </div>
   </body>
 </html>
