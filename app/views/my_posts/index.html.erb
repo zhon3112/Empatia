@@ -1,4 +1,5 @@
-<p><%= current_user.username %>さんの投稿一覧</p>
+<div class="relative w-full min-h-screen flex flex-col items-center py-16 bg-cover bg-center">
+  <h2 class="text-center text-lg font-sans"><%= current_user.username %>さんの投稿一覧</h2>
 
 <!-- 投稿用のモーダル -->
 <button class="btn" onclick="my_modal_1.showModal()">投稿作成</button>
@@ -26,21 +27,26 @@
 </dialog>
 
 <!--- ページ用のタブ --->
-<div role="tablist" class="tabs tabs-bordered">
-  <div role="tab" class="tab">
-    <%= link_to 'みんなの投稿', posts_path %>
+  <div class="flex justify-center">
+    <div role="tablist" class="tabs tabs-bordered w-96 gap-2">
+      <div role="tab" class="tab flex-1 text-center">
+        <%= link_to 'みんなの投稿', posts_path %>
+      </div>
+      <div role="tab" class="tab flex-1 text-center">
+        <%= link_to '自分の投稿', my_posts_path(current_user) %>
+      </div>
+      <div role="tab" class="tab flex-1 text-center">
+        <%= link_to '共感一覧', my_likes_path(current_user) %>
+      </div>
+    </div>
   </div>
-  <div role="tab" class="tab">
-    <span class="tab-link active">自分の投稿</span>
-  </div>
-  <div role="tab" class="tab">
-    <%= link_to 'いいね一覧', my_likes_path(current_user) %>
-  </div>
-</div>
 
 <!--- 自分の投稿を表示 --->
-<div id="tab-content">
-  <% @posts.each do |post| %>
-    <%= render 'my_posts/post', post: post, likes: @likes_by_post[post.id] %>
-  <% end %>
+  <div class="flex justify-center">
+    <div class="max-w-2xl w-full">
+      <% @posts.each do |post| %>
+        <%= render 'my_posts/post', post: post, likes: @likes_by_post[post.id] %>
+      <% end %>
+    </div>
+  </div>
 </div>

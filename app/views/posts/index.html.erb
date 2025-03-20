@@ -1,23 +1,29 @@
-<h2>検索欄</h2>
-<%= render 'search_form', q: @q, url: posts_path %>
-  <p><%= @message %></p>
+<div class="relative w-full min-h-screen flex flex-col items-center py-16 bg-cover bg-center">
+  <h2 class="text-center text-lg font-sans">検索欄</h2>
+  <%= render 'search_form', q: @q, url: posts_path %>
+  <p class="text-center text-black font-serif"><%= @message %></p>
 
 <!--- ページ用のタブ --->
-<div role="tablist" class="tabs tabs-bordered">
-  <div role="tab" class="tab">
-    <span class="tab-link active">みんなの投稿</span>
+  <div class="flex justify-center">
+    <div role="tablist" class="tabs tabs-bordered w-96 gap-2">
+      <div role="tab" class="tab flex-1 text-center">
+        <%= link_to 'みんなの投稿', posts_path %>
+      </div>
+      <div role="tab" class="tab flex-1 text-center">
+        <%= link_to '自分の投稿', my_posts_path(current_user) %>
+      </div>
+      <div role="tab" class="tab flex-1 text-center">
+        <%= link_to '共感一覧', my_likes_path(current_user) %>
+      </div>
+    </div>
   </div>
-  <div role="tab" class="tab">
-    <%= link_to '自分の投稿', my_posts_path(current_user) %>
-  </div>
-  <div role="tab" class="tab">
-    <%= link_to 'いいね一覧', my_likes_path(current_user) %>
-  </div>
-</div>
 
 <!--- みんなの投稿を表示 --->
-<div id="tab-content">
-  <% if @posts.any? %>
-    <%= render @posts, likes_by_post: @likes_by_post %>
-  <% end %>
+  <div class="flex justify-center">
+    <div class="max-w-2xl w-full">
+      <% if @posts.any? %>
+        <%= render @posts, likes_by_post: @likes_by_post %>
+      <% end %>
+    </div>
+  </div>
 </div>

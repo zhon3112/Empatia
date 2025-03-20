@@ -1,8 +1,8 @@
 <%= search_form_for @q do |f| %>
-  <div class="input-group mb-3">
-    <%= f.search_field :content_cont %>
-    <div class="input-group-append">
-      <%= f.submit class: 'btn btn-primary' %>
-    </div>
+  <div class="flex items-center space-x-2 border border-gray-300 rounded-lg px-3 py-2">
+    <%= f.search_field :content_cont, class: "flex-grow outline-none bg-transparent" %>
+    <button type="submit" class="text-white hover:text-gray-700">
+      <i class="fa-solid fa-magnifying-glass text-lg"></i>
+    </button>
   </div>
 <% end %>
