@@ -1,20 +1,26 @@
-<h2>いいね一覧</h2>
+<div class="relative w-full min-h-screen flex flex-col items-center py-16 bg-cover bg-center">
+<h2 class="text-center text-lg font-sans">共感</h2>
 <!--- ページ用のタブ --->
-<div role="tablist" class="tabs tabs-bordered">
-  <div role="tab" class="tab">
-    <%= link_to 'みんなの投稿', posts_path %>
+  <div class="flex justify-center">
+    <div role="tablist" class="tabs tabs-bordered w-96 gap-2">
+      <div role="tab" class="tab flex-1 text-center">
+        <%= link_to 'みんなの投稿', posts_path %>
+      </div>
+      <div role="tab" class="tab flex-1 text-center">
+        <%= link_to '自分の投稿', my_posts_path(current_user) %>
+      </div>
+      <div role="tab" class="tab flex-1 text-center">
+        <%= link_to '共感一覧', my_likes_path(current_user) %>
+      </div>
+    </div>
   </div>
-  <div role="tab" class="tab">
-    <%= link_to '自分の投稿', my_posts_path(current_user) %>
-  </div>
-  <div role="tab" class="tab">
-    <span class="tab-link active">いいね一覧</span>
-  </div>
-</div>
 
 <!--- いいね一覧 --->
-<div id="tab-content">
-  <% @posts.each do |post| %>
-  <%= render "my_likes/post", post: post %>
-  <% end %>
+  <div class="flex justify-center">
+    <div class="max-w-2xl w-full">
+      <% @posts.each do |post| %>
+        <%= render "my_likes/post", post: post %>
+      <% end %>
+    </div>
+  </div>
 </div>

@@ -2,7 +2,9 @@
 <div class="w-96 p-4 border border-white/50 rounded-xl bg-white/60 backdrop-blur-md shadow-md">
   <div class="card-body">
     <p class="text-black text-lg"><%= post.content %></p>
-    <p class="text-gray-500 text-sm"><%= post.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+    <p class="text-gray-500 text-sm mb-0.5"><%= post.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+    <div class="mb-0">
       <%= render 'posts/like_buttons', post: post, likes: likes_by_post[post.id] %>
+    </div>
   </div>
 </div>
