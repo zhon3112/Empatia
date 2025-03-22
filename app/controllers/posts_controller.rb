@@ -18,7 +18,8 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
 
     if @post.save
-      redirect_to my_posts_path(current_user), notice: @post.published? ? '公開で投稿されました！' : '非公開で投稿されました！'
+      flash[:notice] = @post.published? ? '公開で投稿されました！' : '非公開で投稿されました！'
+      redirect_to my_posts_path(current_user)
     else
       flash.now[:alert] = "投稿が失敗しました！"
       render :new, status: :unprocessable_entity
@@ -34,19 +35,21 @@ class PostsController < ApplicationController
 
   def update
     @post = current_user.posts.find(params[:id])
+
     if @post.update(post_params)
       if @post.saved_change_to_status? || @post.saved_change_to_content?
-        notice_message = if @post.saved_change_to_content?
+        flash[:notice] = if @post.saved_change_to_content?
                            '投稿を編集しました'
                          else
                            @post.published? ? '公開に変更されました' : '非公開に変更されました'
                          end
-        redirect_to my_posts_path(current_user), notice: notice_message
       else
-        redirect_to my_posts_path(current_user), notice: '変更はありませんでした'
+        flash[:notice] = '変更はありませんでした'
       end
+      redirect_to my_posts_path(current_user)
     else
-      render :edit
+      flash.now[:alert] = "更新に失敗しました"
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -61,8 +64,8 @@ class PostsController < ApplicationController
 
   # 不正アクセスを防ぐ
   def ensure_correct_user
-    post = Post.find(params[:id]) # 投稿を取得
-    if post.user_id != current_user.id # 投稿のユーザーIDと現在のユーザーIDを比較
+    @post = current_user.posts.find_by(id: params[:id])
+    unless @post
       flash[:alert] = "権限がありません、不正アクセスです！"
       redirect_to posts_path
     end
