@@ -7,9 +7,9 @@
       <%= render 'posts/like_buttons', post: post, likes: @likes_by_post[post.id] %>
     </div>
     <div class="flex justify-end space-x-2 mt-1">
-      <%= link_to edit_post_path(post), id: "post_#{post.id}", class: 'text-gray-700 hover:text-blue-500 transition' do %>
+      <button onclick="document.getElementById('edit_modal_<%= post.id %>').showModal()" class="text-gray-700 hover:text-blue-500 transition">
         <i class="fa-solid fa-pen-fancy text-lg"></i>
-      <% end %>
+      </button>
 
       <%= link_to post_path(post), id: "button-delete-#{post.id}", data: { turbo_method: :delete }, class: 'text-gray-700 hover:text-red-500 transition' do %>
         <i class="fa-solid fa-trash-can text-lg"></i>
@@ -17,3 +17,23 @@
     </div>
   </div>
 </div>
+
+<!--- 編集モーダル --->
+<dialog id="edit_modal_<%= post.id %>" class="modal">
+  <div class="modal-box bg-white">
+    <h3 class="text-lg font-bold text-black">投稿を編集</h3>
+    <%= form_with model: post, url: post_path(post), method: :patch, local: true do |f| %>
+      <div class="form-grouptext-white">
+        <%= f.text_area :content, class: "form-control w-full", rows: 5 %>
+      </div>
+      <div class="form-group text-white">
+        <%= f.label :status, "ステータス" %>
+        <%= f.select :status, [['公開', 'published'], ['非公開', 'unpublished']], {}, class: "form-control" %>
+      </div>
+      <div class="modal-action">
+        <%= f.submit "更新", class: "btn btn-primary" %>
+        <button type="button" onclick="document.getElementById('edit_modal_<%= post.id %>').close()" class="btn red">キャンセル</button>
+      </div>
+    <% end %>
+  </div>
+</dialog>

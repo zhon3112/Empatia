@@ -31,3 +31,15 @@
     </ul>
   </div>
 <% end %>
+
+<% if flash[:notice] %>
+  <%= turbo_stream.append("alerts") do %>
+    <%= render "shared/alert", type: :success, message: flash[:notice] %>
+  <% end %>
+<% end %>
+
+<% if flash[:alert] %>
+  <%= turbo_stream.append("alerts") do %>
+    <%= render "shared/alert", type: :danger, message: flash[:alert] %>
+  <% end %>
+<% end %>
