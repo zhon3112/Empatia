@@ -1,12 +1,12 @@
 <% if flash[:notice] %>
-  <div class="alert alert-success">
+  <div class="flash-message bg-blue-400 text-white text-lg font-bold p-4 rounded-md shadow-md">
     <%= flash[:notice] %>
   </div>
 <% end %>
 
-<% if flash.now[:alert] %>
-  <div class="alert alert-danger">
-    <%= flash.now[:alert] %>
+<% if flash[:alert] %>
+  <div class="flash-message bg-red-500 text-white text-lg font-bold p-4 rounded-md shadow-md">
+    <%= flash[:alert] %>
   </div>
 <% end %>
 
@@ -30,16 +30,4 @@
       <% end %>
     </ul>
   </div>
-<% end %>
-
-<% if flash[:notice] %>
-  <%= turbo_stream.append("alerts") do %>
-    <%= render "shared/alert", type: :success, message: flash[:notice] %>
-  <% end %>
-<% end %>
-
-<% if flash[:alert] %>
-  <%= turbo_stream.append("alerts") do %>
-    <%= render "shared/alert", type: :danger, message: flash[:alert] %>
-  <% end %>
 <% end %>

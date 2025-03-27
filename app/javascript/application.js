@@ -3,3 +3,4 @@ import "@hotwired/turbo-rails"
 import "./controllers"
 //= require jquery
 //= require jquery_ujs
+console.log("🛠 Stimulus がロードされたよ！"); // 確認用
