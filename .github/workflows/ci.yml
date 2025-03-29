@@ -28,7 +28,7 @@ jobs:
           bundler-cache: true
 
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
@@ -64,7 +64,7 @@ jobs:
 
       - name: Archive Capybara screenshots
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v2
         with:
           name: capybara-screenshots
           path: tmp/capybara
