@@ -42,9 +42,6 @@ jobs:
 
       - name: Bundler and gem install
         run: |
-          lsof -i:4444 || echo "Port 4444 is not in use"
-          lsof -i:4445 || echo "Port 4445 is not in use"
-          lsof -i:9999 || echo "Port 9999 is not in use"
           gem install bundler
           bundle install --jobs 4 --retry 3 --path vendor/bundle
 
@@ -68,7 +65,11 @@ jobs:
           bundle exec rake assets:precompile RAILS_ENV=test
 
       - name: Run rspec
-        run: RAILS_ENV=test bundle exec rspec
+        run: |
+          lsof -i:4444 || echo "Port 4444 is not in use"
+          lsof -i:4445 || echo "Port 4445 is not in use"
+          lsof -i:9999 || echo "Port 9999 is not in use"
+          RAILS_ENV=test bundle exec rspec
 
       - name: Archive Capybara screenshots
         if: failure()
