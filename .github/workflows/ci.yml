@@ -42,7 +42,7 @@ jobs:
 
       - name: Bundler and gem install
         run: |
-          lsof -i -P
+          lsof -i:4444,4445,9999
           gem install bundler
           bundle install --jobs 4 --retry 3 --path vendor/bundle
 
