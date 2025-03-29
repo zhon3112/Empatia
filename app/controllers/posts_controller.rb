@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :require_login
-  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+  before_action :ensure_correct_user, only: [ :edit, :update, :destroy ]
 
   def index
     @q = Post.ransack(params[:q])
@@ -17,7 +17,7 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      flash[:notice] = @post.published? ? '公開で投稿されました！' : '非公開で投稿されました！'
+      flash[:notice] = @post.published? ? "公開で投稿されました！" : "非公開で投稿されました！"
       redirect_to my_posts_path
     else
       flash[:alert] = "投稿に失敗しました。"
@@ -34,16 +34,13 @@ class PostsController < ApplicationController
 
   def update
     @post = current_user.posts.find(params[:id])
-
     if @post.update(post_params)
-      if @post.saved_change_to_status? || @post.saved_change_to_content?
-        flash[:notice] = if @post.saved_change_to_content?
-                           '投稿を編集しました'
-                         else
-                           @post.published? ? '公開に変更されました' : '非公開に変更されました'
-                         end
+      if @post.saved_change_to_content?
+        flash[:notice] = "投稿を編集しました"
+      elsif @post.saved_change_to_status?
+        flash[:notice] = @post.published? ? "公開に変更されました" : "非公開に変更されました"
       else
-        flash[:notice] = '変更はありませんでした'
+        flash[:notice] = "変更はありませんでした"
       end
       redirect_to my_posts_path
     else
