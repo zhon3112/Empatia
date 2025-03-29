@@ -21,7 +21,7 @@ class LikesController < ApplicationController
     update_like_data
 
     respond_to do |format|
-      format.turbo_stream { render "likes/create" } # **destroy の場合も create を使う**
+      format.turbo_stream { render "likes/create" } # destroy の場合も create を使う
     end
   end
 
@@ -47,7 +47,7 @@ class LikesController < ApplicationController
   private
 
   def update_like_data
-    @user_likes = current_user.likes.group_by(&:post_id) # **ユーザーのいいねデータを更新**
-    @likes_by_post = Like.group_by_post # **全体のいいねデータを更新**
+    @user_likes = current_user.likes.group_by(&:post_id) # ユーザーのいいねデータを更新
+    @likes_by_post = Like.group_by_post # 全体のいいねデータを更新
   end
 end
