@@ -2,10 +2,10 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :likes, dependent: :destroy
 
-  validates :content,invalid_words: true
-  validates :content, presence: true, length: { maximum: 140 }
+  validates :content, invalid_words: true
+  validates :content, presence: true, length: {maximum: 140}
 
-  enum status: { published: 0, unpublished: 1 }, _default: :published # 投稿のステータス(公開・非公開)
+  enum status: {published: 0, unpublished: 1}, _default: :published # 投稿のステータス(公開・非公開)
 
   scope :published, -> { where(status: :published) } # 公開の投稿だけを取得
 
