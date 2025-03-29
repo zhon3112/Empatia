@@ -18,6 +18,10 @@ jobs:
           MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: myapp_test
         options: --health-cmd "mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 10
+      chrome:
+        image: seleniarm/standalone-chromium:latest
+        ports:
+          - 4444:4444
 
     steps:
       - name: Checkout code
