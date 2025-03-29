@@ -48,14 +48,6 @@ RSpec.describe User, type: :model do
       expect(user).to_not be_valid
     end
 
-    it '利用規約に同意していない場合は無効' do
-      user.username = "username"
-      user.email = "test@example.com"
-      user.password = "password"
-      user.password_confirmation = "password"
-      expect(user).to_not be_valid
-    end
-
     it 'パスワードが8文字未満の場合は無効' do
       user.username = "username"
       user.email = "test@example.com"

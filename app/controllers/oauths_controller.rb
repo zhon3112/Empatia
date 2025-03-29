@@ -9,14 +9,14 @@ class OauthsController < ApplicationController
     provider = auth_params[:provider]
     # 既存のユーザーをプロバイダ情報を元に検索、存在すればログイン
     if (@user = login_from(provider))
-      redirect_to posts_path, success: 'Googleアカウントでログインしました'
+      redirect_to posts_path, success: "Googleアカウントでログインしました"
     else
       begin
         # ユーザーが存在しない場合はプロバイダ情報を元に新規ユーザーを作成してログイン
         signup_and_login(provider)
-        redirect_to posts_path, success: 'Googleアカウントでログインしました'
+        redirect_to posts_path, success: "Googleアカウントでログインしました"
       rescue
-        redirect_to root_path, danger: 'Googleアカウントでログインに失敗しました'
+        redirect_to root_path, danger: "Googleアカウントでログインに失敗しました"
       end
     end
   end

@@ -49,8 +49,9 @@ gem "bootsnap", require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem 'better_errors'
-  gem 'binding_of_caller'
+  gem "better_errors"
+  gem "binding_of_caller"
+  gem "bullet"
 end
 
 group :development do
@@ -62,8 +63,6 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
-
-  gem 'bullet'
 end
 
 # systemspecで使用
@@ -75,36 +74,36 @@ group :test do
 end
 
 # ユーザー登録・ログインで使用
-gem 'sorcery'
+gem "sorcery"
 
 # 検索機能で使用
-gem 'ransack', '4.2.0'
+gem "ransack", "4.2.0"
 
 # 静的OGPで使用
-gem 'meta-tags'
+gem "meta-tags"
 
-gem 'jquery-rails'
+gem "jquery-rails"
 
 # .envファイルで使用
-gem 'dotenv-rails'
+gem "dotenv-rails"
 
 # Google認証で使用
-gem 'config'
+gem "config"
 
 # i18nで使用
-gem 'rails-i18n'
+gem "rails-i18n"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem 'debug', platforms: %i[ mri windows ], require: "debug/prelude"
+  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
 
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
-  gem 'brakeman', require: false
+  gem "brakeman", require: false
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
-  gem 'rubocop-rails-omakase', require: false
+  gem "rubocop-rails-omakase", require: false
 
   # RSpecで使用
-  gem 'rspec-rails'
-  gem 'factory_bot_rails'
+  gem "rspec-rails"
+  gem "factory_bot_rails"
 end
