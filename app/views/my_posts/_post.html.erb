@@ -1,6 +1,13 @@
 <!--- 自分の投稿のデザイン --->
 <div class="w-96 p-4 border border-white/50 rounded-xl bg-white/60 backdrop-blur-md shadow-md">
   <div class="card-body">
+    <div class="ml-auto">
+      <% if post.published? %>
+        <span class="public-mark text-green-500"><i class="fa-solid fa-lock-open"></i></span>
+      <% else %>
+        <span class="private-mark text-red-500"><i class="fa-solid fa-lock"></i></span>
+      <% end %>
+    </div>
     <p class="text-black text-lg"><%= post.content %></p>
     <p class="text-gray-500 text-sm mb-0.5"><%= post.created_at.strftime("%Y/%m/%d %H:%M") %></p>
     <div class="mb-0">
