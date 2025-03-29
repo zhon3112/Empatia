@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :system do
-  let(:user) { create(:user) }
+  let(:user) { User.create!(username: "test1", email: "email@example.com", password: "testuser8", password_confirmation: "testuser8") }
 
   describe "ログイン前" do
     describe "ユーザー新規登録" do
@@ -11,7 +11,7 @@ RSpec.describe "Users", type: :system do
           fill_in "ユーザー名", with: "test1"
           fill_in "メールアドレス", with: "email@example.com"
           fill_in "パスワード", with: "password"
-          fill_in "パスワード確認", with: "password"
+          fill_in "パスワード再入力", with: "password"
           click_button "登録"
           expect(page).to have_content "ユーザーが作成されました"
           expect(current_path).to eq posts_path
@@ -24,17 +24,17 @@ RSpec.describe "Users", type: :system do
           fill_in "ユーザー名", with: "test1"
           fill_in "メールアドレス", with: ""
           fill_in "パスワード", with: "password"
-          fill_in "パスワード確認", with: "password"
+          fill_in "パスワード再入力", with: "password"
           click_button "登録"
           expect(page).to have_content "ユーザー登録に失敗しました"
           expect(page).to have_content "メールアドレスを入力してください"
-          expect(current_path).to eq users_path
+          expect(current_path).to eq new_user_path
         end
       end
 
       context "登録済のメールアドレスを使用" do
         it "ユーザーの新規作成が失敗する" do
-          existed_user = create(:user, email: "email@example.com")
+          existed_user = User.create!(username: "test1", email: "email@example.com", password: "testuser8", password_confirmation: "testuser8")
           visit new_user_path
           fill_in "ユーザー名", with: "test1"
           fill_in "メールアドレス", with: "email@example.com"
@@ -43,7 +43,7 @@ RSpec.describe "Users", type: :system do
           click_button "登録"
           expect(page).to have_content "ユーザー登録に失敗しました"
           expect(page).to have_content "メールアドレス：このメールアドレスは登録済みです"
-          expect(current_path).to eq users_path
+          expect(current_path).to eq new_user_path
           expect(page).to have_field "メールアドレス", with: "email@example.com"
         end
       end
