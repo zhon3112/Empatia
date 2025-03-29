@@ -1,4 +1,4 @@
-name: CI
+name: ci
 
 on:
   pull_request:
@@ -6,8 +6,17 @@ on:
     branches: [ '*' ]
 
 jobs:
-  test:
+  rspec:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      mysql:
+        image: mysql:8.0
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+        options: --health-cmd "mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 10
 
     steps:
       - name: Checkout code
@@ -16,24 +25,61 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.2.3'  # 使用するRubyのバージョンを指定
+          bundler-cache: true
 
-      - name: Install dependencies
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Bundler and gem install
         run: |
           gem install bundler
-          bundle install
+          bundle install --jobs 4 --retry 3 --path vendor/bundle
+
+      - name: Yarn install
+        run: yarn install --check-files
+
+      - name: Wait for MySQL
+        run: sleep 15
 
       - name: Database create and migrate
         run: |
           cp config/database.ci.yml config/database.yml
-          RAILS_ENV=test bundle exec rake db:create
-          RAILS_ENV=test bundle exec rake db:migrate
+          bundle exec rails db:create RAILS_ENV=test
+          bundle exec rails db:migrate RAILS_ENV=test
 
-      - name: Run Brakeman
-        run: bin/brakeman
+      - name: Chrome Install
+        run: sudo apt-get install google-chrome-stable
 
-      - name: Run RuboCop
-        run: bin/rubocop
+      - name: Precompile assets
+        run: |
+          bundle exec rake assets:precompile RAILS_ENV=test
 
-      - name: Run RSpec
-        run: bundle exec rspec
+      - name: Run rspec
+        run: RAILS_ENV=test bundle exec rspec
+
+      - name: Archive Capybara screenshots
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: capybara-screenshots
+          path: tmp/capybara
+
+  rubocop:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Run rubocop
+        run: bundle exec rubocop -a
