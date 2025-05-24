@@ -46,117 +46,18 @@ SNSを用いた宣伝等
 ### 簡単かつ直感的な操作
 複数のいいねボタンは視覚的に分かりやすく配置されており、ユーザーは簡単に直感的に操作できます。これにより、誰でも気軽に共感を示すことができ、ユーザー体験が向上します。  
 
-# 機能候補
-### 現状
-- ユーザー登録機能
-  - メール
-  - パスワード
-
-- ログイン機能
-  - メール
-  - パスワード
-
-- 投稿機能
-  - 作成
-  - 編集
-  - 削除
-  - 公開・非公開
-
-- いいね機能(追加あり)
-  - 嬉しい
-  - 怒る
-  - 悲しい
-  - 楽しい
-  - 応援(がんばれ)
-  - 感謝
-  - 驚き
-  - 考える
-  - 分かる(共感)
-  - 素晴らしい
- 
-- タグ検索機能
-
-### MVP
-- つぶやきのランダム投稿表示機能
-
-### 本リリース
-- レスポンシブデザイン
-
-# 機能の実装方針予定
-今の所はLINE通知機能: LINE Messaging APIを予定していますが、ユーザー登録機能とログイン機能をGoogle認証にするかで変更します。  
-(いいねがついた時の通知としてLINE通知機能を使うか、ログイン機能をGoogle認証にするかで検討中です。)
-
-# 使用予定の技術スタック
+# 技術スタック
 | カテゴリ | 技術 |
 | --- | --- |
 | 開発環境 | Docker |
-| フロントエンド | HTML / CSS / JavaScript |
+| フロントエンド | Rails 7.1.3.2 (Hotwire/Turbo), TailwindCSS, DaisyUI |
 | バックエンド | Rails 7.1.3.2 (Ruby 3.2.2 ) |
-| データベース | MySQL2 |
+| データベース | MySQL2/jawsDB |
 | インフラ | Heroku |
-| Web API | Google OAuth 2.0 API または LINE Messaging API |
+| 認証 | Sorcery/Googleログイン |
 
 # 画面遷移図
 [画面遷移図](https://www.figma.com/design/NwasnzHU8AJUFSiIa6SBPg/Empatia?node-id=0-1&t=uaA2LspzBDUCsqhL-1)
 
 # ER図
-### [ER図](https://gyazo.com/1254a680c4e85dde4ad9dcc2c1ac6a14)
-
-![alt text](image.png)
-
-- usersテーブル(ユーザー情報をもつテーブル)
-  - id : ユーザーID(主キー)
-  - name : 名前
-  - email : メールアドレス
-  - crypted_password : パスワード
-  - created_at : 作成日時
-  - updated_at : 更新日時
-
-
-- postsテーブル(ポストの情報をもつテーブル)
-  - id : ポストID(主キー)
-  - user_id : ユーザーID(外部キー)
-  - content : 内容
-  - is_public : 公開・非公開のフラグ
-  - created_at : 作成日時
-  - updated_at : 更新日時
-
-
-- tagsテーブル(タグの情報をもつテーブル) 
-  - id : タグのID(主キー)
-  - name : タグの名前
-  - created_at : 作成日時
-  - updated_at : 更新日時
-
-
-- post_tagsテーブル(ポストタグの情報をもつテーブル/中間テーブル)
-  - id : ポストタグID(主キー)
-  - post_id : ポストID(外部キー)
-  - tag_id : タグID(外部キー)
-  - created_at : 作成日時
-  - updated_at : 更新日時
-
-
-- like_typesテーブル (いいねの種類の情報をもつテーブル)
-  - id : いいねの種類のID (主キー)
-  - name : いいねの種類名 (例: "嬉しい", "悲しい", "怒る" など)
-  - created_at : 作成日時
-  - updated_at : 更新日時
-
-
-- like_postsテーブル(いいねの情報をもつテーブル)
-  - id : いいねのID(主キー)
-  - user_id : ユーザーID(外部キー)
-  - post_id : ポストID(外部キー)
-  - like_type_id : いいねの種類のID (外部キー)
-  - created_at : 作成日時
-  - updated_at : 更新日時
-
-
-- テーブル間のリファレンス(外部キーの定義)
-  - posts.user_id は users.id を参照
-  - post_tags.post_id は posts.id を参照
-  - post_tags.tag_id は tags.id を参照
-  - like_posts.user_id は users.id を参照
-  - like_posts.post_id は posts.id を参照
-  - like_posts.like_type_id は like_types.id を参照
+[![Image from Gyazo](https://i.gyazo.com/8ea451d920405017d13a9ef60ddd3548.png)](https://gyazo.com/8ea451d920405017d13a9ef60ddd3548)
