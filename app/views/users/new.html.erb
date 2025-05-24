@@ -22,15 +22,6 @@
       <%= f.password_field :password_confirmation, class: "w-full p-3 rounded-lg bg-white/20 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" %>
     </div>
 
-    <div class="mb-4 md:mb-6">
-      <%= link_to '利用規約はこちらから', terms_path, target: '_blank', class: "text-serif text-blue-300 hover:text-blue-400" %>
-    </div>
-
-    <div class="mb-4 md:mb-6 flex items-center">
-      <%= f.check_box :terms_accepted, {}, true, false %>
-      <%= f.label :terms_accepted, '利用規約に同意します', class: "text-serif text-white/70 mr-2" %>
-    </div>
-
     <div class="mb-6">
       <%= f.submit "登録", class: "w-full py-3 bg-blue-500 text-serif text-white rounded-lg hover:bg-blue-600 transition duration-300" %>
     </div>
