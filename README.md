@@ -18,10 +18,8 @@ SNSや他のコミュニケーションアプリとは異なり、このアプ�
 | --- | --- | --- |
 | [![Image from Gyazo](https://i.gyazo.com/c7e8043d77211bb0b2db5083c7443f09.jpg)](https://gyazo.com/c7e8043d77211bb0b2db5083c7443f09) | [![Image from Gyazo](https://i.gyazo.com/5b2c2cbcbbf33d72c9f61bad32ae6f1a.jpg)](https://gyazo.com/5b2c2cbcbbf33d72c9f61bad32ae6f1a) | [![Image from Gyazo](https://i.gyazo.com/ee8f7b291bdb9a8c8cd399bba0ea1d25.jpg)](https://gyazo.com/ee8f7b291bdb9a8c8cd399bba0ea1d25) |
 | みんなの投稿一覧 | 自分の投稿一覧 | 共感一覧 |
-| --- | --- | --- |
 | [![Image from Gyazo](https://i.gyazo.com/f302328e7b0752e9509058b5ddcfff69.jpg)](https://gyazo.com/f302328e7b0752e9509058b5ddcfff69) | [![Image from Gyazo](https://i.gyazo.com/59653acce12d822259462fc2ab3950fc.jpg)](https://gyazo.com/59653acce12d822259462fc2ab3950fc) | [![Image from Gyazo](https://i.gyazo.com/72c06429fac931e141173654017e29b7.jpg)](https://gyazo.com/72c06429fac931e141173654017e29b7) |
 | 投稿作成モーダル | 投稿編集モーダル |
-| --- | --- |
 | [![Image from Gyazo](https://i.gyazo.com/b43dcef9ee987942b82ac2048bd53fcd.png)](https://gyazo.com/b43dcef9ee987942b82ac2048bd53fcd) | [![Image from Gyazo](https://i.gyazo.com/b131c08a362e4dcea4a6a3eb2deaba3e.png)](https://gyazo.com/b131c08a362e4dcea4a6a3eb2deaba3e) |
 
 
